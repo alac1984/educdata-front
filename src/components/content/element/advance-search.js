@@ -11,8 +11,8 @@ export class AdvSearch extends Component {
                         <div className="row">
                             <div className="col-lg-10 offset-lg-1">
                                 <div className="search_title_area">
-                                    <h2 className="title">Find the Best Places to Be</h2>
-                                    <p className="sub_title">All the top locations – from restaurants and clubs, to galleries, famous places and more..</p>
+                                    <h2 className="title">Dados educacionais para jornalistas</h2>
+                                    <p className="sub_title">Bem-vindo ao educDATA. Nosso trabalho é fornecer dados sobre a educação brasileira.</p>
                                 </div>{/* ends: .search_title_area */}
                                 <form action="/" className="search_form">
                                     <div className="atbd_seach_fields_wrapper">
