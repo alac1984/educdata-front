@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
+import Typewriter from 'typewriter-effect';
 const noAction = e => e.preventDefault();
 export class AdvSearch extends Component {
 
@@ -11,7 +12,24 @@ export class AdvSearch extends Component {
                         <div className="row">
                             <div className="col-lg-10 offset-lg-1">
                                 <div className="search_title_area">
-                                    <h2 className="title">Dados educacionais para jornalistas</h2>
+                                    <div>
+                                        <h2 className="title mr-2">Dados educacionais para</h2>
+                                        <h2 className="title ml-1 title-typewriter"><Typewriter options={{ loop: 'true' }} onInit={(typewriter) => {
+                                            typewriter.typeString(' professores.')
+                                                .pauseFor(2500)
+                                                .deleteAll()
+                                                .typeString(' jornalistas.')
+                                                .pauseFor(2500)
+                                                .deleteAll()
+                                                .typeString(' gestores.')
+                                                .pauseFor(2500)
+                                                .deleteAll()
+                                                .typeString(' estudantes.')
+                                                .pauseFor(2500)
+                                                .deleteAll()
+                                                .start()
+                                        }} /></h2>
+                                    </div>
                                     <p className="sub_title">Bem-vindo ao educDATA. Nosso trabalho é fornecer dados sobre a educação brasileira.</p>
                                 </div>{/* ends: .search_title_area */}
                                 <form action="/" className="search_form">
@@ -21,18 +39,18 @@ export class AdvSearch extends Component {
                                         </div>
                                         <div className="single_search_field search_category">
                                             <select className="search_fields" id="at_biz_dir-category">
-                                            <option value>Select a category</option>
-                                            <option value="automobile">Automobile</option>
-                                            <option value="education">Education</option>
-                                            <option value="event">Event</option>
+                                                <option value>Select a category</option>
+                                                <option value="automobile">Automobile</option>
+                                                <option value="education">Education</option>
+                                                <option value="event">Event</option>
                                             </select>
                                         </div>
                                         <div className="single_search_field search_location">
                                             <select className="search_fields" id="at_biz_dir-location">
-                                            <option value>Select a location</option>
-                                            <option value="ab">AB Simple</option>
-                                            <option value="australia">Australia</option>
-                                            <option value="australia-australia">Australia</option>
+                                                <option value>Select a location</option>
+                                                <option value="ab">AB Simple</option>
+                                                <option value="australia">Australia</option>
+                                                <option value="australia-australia">Australia</option>
                                             </select>
                                         </div>
                                         <div className="atbd_submit_btn">

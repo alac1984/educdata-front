@@ -70,6 +70,7 @@
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "1.2.3",
     "ts-pnp": "1.1.2",
+    "typewriter-effect": "^2.13.1",
     "url-loader": "1.1.2",
     "webpack": "4.29.6",
     "webpack-dev-server": "3.2.1",
@@ -80,7 +81,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "compile": "node-sass public/assets/theme_assets/sass/style.scss build/assets/style2.css -w"
   },
   "eslintConfig": {
     "extends": "react-app"

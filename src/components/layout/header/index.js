@@ -21,8 +21,8 @@ class Header extends Component {
                     <div className="top-menu-area">
                         <div className="container-fluid">
                             <div className="row">
-                                <div className="col-lg-12">
-                                    <div className="menu-fullwidth">
+                                <div className="col-12">
+                                    <div className="menu-fullwidth d-flex justify-content-between">
                                         <div className="logo-wrapper order-lg-0 order-sm-1">
                                             <div className="logo logo-top">
                                                 <NavLink to="/"><img src={this.props.logo} alt="logoImage" className="img-fluid" /></NavLink>

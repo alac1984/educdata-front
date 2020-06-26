@@ -26,9 +26,9 @@
       }
     }
   }
-  .menu-area .menu-fullwidth .menu-container{
-    width: 75%;
-  }
+  // .menu-area .menu-fullwidth .menu-container{
+  //   width: 75%;
+  // }
   .menu-right{
     width: 10%;
     .search-wrapper, .author-area{
@@ -53,6 +53,10 @@
 @media (max-width: 991.98px) {
   html{
     font-size: 14px;
+  }
+
+  .menu-fullwidth {
+    height: 52px;
   }
 
   /* navbar menu */
