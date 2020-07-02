@@ -208,10 +208,16 @@
   }
   .directory_content_area .search_form .atbd_seach_fields_wrapper{
     flex-wrap: wrap;
+    flex: 4;
     .single_search_field, .atbd_submit_btn{
-      flex: auto;
       width: 45%;
       margin: 5px;
+    }
+    .single_search_field {
+      flex: 4;
+    }
+    .atbd_submit_btn {
+      flex: 1;
     }
   }
   .atbd_listing_bottom_content{

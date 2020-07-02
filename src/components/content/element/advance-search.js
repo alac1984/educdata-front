@@ -1,91 +1,70 @@
 import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Typewriter from 'typewriter-effect';
+import { loadUnidades } from '../../../Store/slices/search'
 const noAction = e => e.preventDefault();
-export class AdvSearch extends Component {
 
+let searchTerm = ''
+
+class AdvSearch extends Component {
+    state = {
+        searching: false
+    }
+
+    handleChange = (e) => {
+        this.searching = true
+        console.log(this.searching)
+        searchTerm = e.target.value
+        this.props.dispatch(loadUnidades(searchTerm))
+        if (searchTerm === '') {
+            this.searching = false
+            console.log(this.searching)
+        }
+    }
     render() {
         return (
             <Fragment>
-                <div className="directory_content_area">
+                <div className={`directory_content_area ${this.searching ? "align-items-start" : ""}`}>
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-10 offset-lg-1">
                                 <div className="search_title_area">
-                                    <div>
-                                        <h2 className="title mr-2">Dados educacionais para</h2>
-                                        <h2 className="title ml-1 title-typewriter"><Typewriter options={{ loop: 'true' }} onInit={(typewriter) => {
-                                            typewriter.typeString(' professores.')
-                                                .pauseFor(2500)
-                                                .deleteAll()
-                                                .typeString(' jornalistas.')
-                                                .pauseFor(2500)
-                                                .deleteAll()
-                                                .typeString(' gestores.')
-                                                .pauseFor(2500)
-                                                .deleteAll()
-                                                .typeString(' estudantes.')
-                                                .pauseFor(2500)
-                                                .deleteAll()
-                                                .start()
-                                        }} /></h2>
-                                    </div>
-                                    <p className="sub_title">Bem-vindo ao educDATA. Nosso trabalho é fornecer dados sobre a educação brasileira.</p>
+                                    {!this.searching ? (
+                                        <div>
+                                            <h2 className="title mr-2">Dados educacionais para</h2>
+                                            <h2 className="title ml-1 title-typewriter"><Typewriter options={{ loop: 'true' }} onInit={(typewriter) => {
+                                                typewriter.typeString(' professores.')
+                                                    .pauseFor(2500)
+                                                    .deleteAll()
+                                                    .typeString(' jornalistas.')
+                                                    .pauseFor(2500)
+                                                    .deleteAll()
+                                                    .typeString(' gestores.')
+                                                    .pauseFor(2500)
+                                                    .deleteAll()
+                                                    .typeString(' estudantes.')
+                                                    .pauseFor(2500)
+                                                    .deleteAll()
+                                                    .start()
+                                            }} /></h2>
+                                            <p className="sub_title">Bem-vindo ao educDATA. Nosso trabalho é fornecer dados sobre a educação brasileira.</p>
+                                        </div>
+
+                                    ) : null}
                                 </div>{/* ends: .search_title_area */}
                                 <form action="/" className="search_form">
                                     <div className="atbd_seach_fields_wrapper">
                                         <div className="single_search_field search_query">
-                                            <input className="form-control search_fields" type="text" placeholder="What are you looking for?" />
-                                        </div>
-                                        <div className="single_search_field search_category">
-                                            <select className="search_fields" id="at_biz_dir-category">
-                                                <option value>Select a category</option>
-                                                <option value="automobile">Automobile</option>
-                                                <option value="education">Education</option>
-                                                <option value="event">Event</option>
-                                            </select>
-                                        </div>
-                                        <div className="single_search_field search_location">
-                                            <select className="search_fields" id="at_biz_dir-location">
-                                                <option value>Select a location</option>
-                                                <option value="ab">AB Simple</option>
-                                                <option value="australia">Australia</option>
-                                                <option value="australia-australia">Australia</option>
-                                            </select>
+                                            <input className="form-control search_fields" type="text"
+                                                placeholder="Digite o nome de uma escola, município, estado ou região"
+                                                onChange={this.handleChange} />
                                         </div>
                                         <div className="atbd_submit_btn">
-                                            <button type="submit" onClick={noAction} className="btn btn-block btn-gradient btn-gradient-one btn-md btn_search">Search</button>
+                                            <button type="submit" onClick={noAction} className="btn btn-block btn-gradient btn-gradient-one btn-md btn_search">Buscar</button>
                                         </div>
                                     </div>
                                 </form>{/* ends: .search_form */}
-                                <div className="directory_home_category_area">
-                                    <ul className="categories">
-                                        <li>
-                                            <NavLink onClick={noAction} to="/at_demo">
-                                                <span className="color-primary"><i className="la la-cutlery" /></span>
-                                                Restaurants
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink onClick={noAction} to="/at_demo">
-                                                <span className="color-success"><i className="la la-map-marker" /></span>
-                                                Places
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink onClick={noAction} to="/at_demo">
-                                                <span className="color-warning"><i className="la la-shopping-cart" /></span>
-                                                Shopping
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink onClick={noAction} to="/at_demo">
-                                                <span className="color-danger"><i className="la la-bed" /></span>
-                                                Hotels
-                                            </NavLink>
-                                        </li>
-                                    </ul>
-                                </div>{/* ends: .directory_home_category_area */}
                             </div>{/* ends: .col-lg-10 */}
                         </div>
                     </div>
@@ -95,3 +74,10 @@ export class AdvSearch extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        results: state.search.unidades
+    }
+}
+
+export default connect(mapStateToProps)(AdvSearch);

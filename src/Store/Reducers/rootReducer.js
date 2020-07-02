@@ -10,6 +10,7 @@ import blogReducer from './blogReducer';
 import usersReducer from './usersReducer';
 import loginReducer from './loginReducer';
 import logoReducer from './logoReducer';
+import searchReducer from '../slices/search'
 
 const rootReducer = combineReducers({
     category: catReducer,
@@ -23,5 +24,6 @@ const rootReducer = combineReducers({
     users: usersReducer,
     login: loginReducer,
     logo: logoReducer,
+    search: searchReducer
 });
 export default rootReducer;
