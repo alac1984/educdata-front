@@ -6868,7 +6868,7 @@ p {
 .intro-wrapper {
   position: relative;
   height: 100vh;
-  overflow: hidden;
+  /* There was an overflow: hidden before*/
 }
 
 .directory_content_area {
@@ -6907,11 +6907,9 @@ p {
 }
 
 .directory_content_area .search_form .atbd_seach_fields_wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   background: #fff;
   padding: 2rem;
+  border: 1px solid #b3b5b3;
   -webkit-border-radius: 0.1875rem;
           border-radius: 0.1875rem;
 }

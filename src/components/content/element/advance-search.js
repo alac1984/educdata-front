@@ -1,9 +1,42 @@
 import React, { Component, Fragment } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { css } from 'emotion';
 import Typewriter from 'typewriter-effect';
 import { loadUnidades } from '../../../Store/slices/search'
 const noAction = e => e.preventDefault();
+
+
+const ulStyle = css`
+    list-style: none;
+    background-color: white;
+    padding: 0;
+    padding-top: 10px;
+`
+
+const itemStyle = css`
+   text-align: left;
+
+   &:hover {
+      background-color: #f5f7fc;
+   }
+`
+const itemContainerStyle = css`
+   display: grid;
+   min-height: 60px;
+   border-bottom: 1px solid #D3D3D3;
+   grid-template-columns: 2fr 1fr;
+`
+const unidadeStyle = css`
+    grid-column: 1 / 1;
+    margin: 0;
+    align-self: center;
+    font-size: 17px;
+`
+const informationStyle = css`
+    font-size: 13px;
+    list-style: none;
+`
 
 let searchTerm = ''
 
@@ -14,12 +47,10 @@ class AdvSearch extends Component {
 
     handleChange = (e) => {
         this.searching = true
-        console.log(this.searching)
         searchTerm = e.target.value
         this.props.dispatch(loadUnidades(searchTerm))
         if (searchTerm === '') {
             this.searching = false
-            console.log(this.searching)
         }
     }
     render() {
@@ -60,9 +91,28 @@ class AdvSearch extends Component {
                                                 placeholder="Digite o nome de uma escola, município, estado ou região"
                                                 onChange={this.handleChange} />
                                         </div>
-                                        <div className="atbd_submit_btn">
-                                            <button type="submit" onClick={noAction} className="btn btn-block btn-gradient btn-gradient-one btn-md btn_search">Buscar</button>
-                                        </div>
+                                        {this.searching ? (
+                                            <ul className={ulStyle}>
+                                                {typeof this.props.results === 'object' && this.props.results !== null ? (
+                                                    this.props.results.map(unidade => (
+                                                        <li className={itemStyle} key={unidade.id_unidade}>
+                                                            <div className={itemContainerStyle}>
+                                                                <div className={unidadeStyle}>
+                                                                    <Link to={'/unidade/' + unidade.id_unidade}>
+                                                                        {unidade.nm_unidade}
+                                                                    </Link>
+                                                                </div>
+                                                                <ul className={informationStyle}>
+                                                                    <li>ID: {unidade.id_unidade}</li>
+                                                                    <li>Tipo: {unidade.nm_tipo}</li>
+                                                                    <li>Local: {unidade.nm_unidade_pai}</li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                    ))
+                                                ) : console.log('não')}
+                                            </ul>
+                                        ) : null}
                                     </div>
                                 </form>{/* ends: .search_form */}
                             </div>{/* ends: .col-lg-10 */}

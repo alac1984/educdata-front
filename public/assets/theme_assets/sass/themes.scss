@@ -15,7 +15,7 @@
 .intro-wrapper{
   position: relative;
   height: 100vh;
-  overflow: hidden;
+  /* There was an overflow: hidden before*/
 }
 
 //Intro search area
@@ -46,9 +46,9 @@
   }
   .search_form{
     .atbd_seach_fields_wrapper{
-      display: flex;
       background: #fff;
       padding: remy(30px);
+      border: 1px solid #b3b5b3;
       border-radius: $border-radius;
       .single_search_field{
         margin-right: remy(6px);
@@ -1006,8 +1006,6 @@
     margin: 0 0 remy(25px);
   }
 }
-
-
 
 
 
