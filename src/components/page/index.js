@@ -42,8 +42,8 @@ class Index extends Component {
                 <section className="categories-cards section-padding-two">
                     <div className="container">
                         <SectionTitle 
-                            title="What Kind of Activity do you Want to try?" 
-                            content="Discover best things to do restaurants, shopping, hotels, cafes and places around the world by categories."
+                            title="Veja o desempenho nas principais avaliações" 
+                            content="Além de estatísticas sobre escolas, municípios e estados, você pode conferir os dados relativos às avaliações e índices mais importantes do país, de forma integrada e simples."
                         />
                         <div className="row">
                             <CardCategoryGrid4 />

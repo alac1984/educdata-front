@@ -8299,7 +8299,6 @@ p {
             flex: 4;
   }
   .directory_content_area .search_form .atbd_seach_fields_wrapper .single_search_field, .directory_content_area .search_form .atbd_seach_fields_wrapper .atbd_submit_btn {
-    width: 45%;
     margin: 5px;
   }
   .directory_content_area .search_form .atbd_seach_fields_wrapper .single_search_field {
