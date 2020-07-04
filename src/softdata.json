@@ -3,44 +3,44 @@
         {
             "img" : "./assets/img/cat1.jpg",
             "id" : "1",
-            "category" : "Restaurants",
-            "icon" : "la-cutlery",
-            "list" : "10"
+            "category" : "ENEM",
+            "icon" : "la-graduation-cap",
+            "list" : "203923"
         },
         {
             "img" : "./assets/img/cat2.jpg",
             "id" : "2",
-            "category" : "Places & Destination",
-            "icon" : "la-map-marker",
-            "list" : "20"
+            "category" : "SAEB",
+            "icon" : "la-certificate",
+            "list" : "120293"
         },
         {
             "img" : "./assets/img/cat3.jpg",
             "id" : "3",
-            "category" : "Shopping & Store",
-            "icon" : "la-shopping-cart",
-            "list" : "30"
+            "category" : "Prova Brasil",
+            "icon" : "la-sticky-note",
+            "list" : "140392"
         },
         {
             "img" : "./assets/img/cat4.jpg",
             "id" : "4",
-            "category" : "Art & History",
-            "icon" : "la-bank",
-            "list" : "20"
+            "category" : "Estados",
+            "icon" : "la-location-arrow",
+            "list" : "54"
         },
         {
             "img" : "./assets/img/cat5.jpg",
             "id" : "5",
-            "category" : "Hotel & Travel",
-            "icon" : "la-bed",
-            "list" : "100"
+            "category" : "Regiões",
+            "icon" : "la-road",
+            "list" : "6"
         },
         {
             "img" : "./assets/img/cat6.jpg",
             "id" : "6",
-            "category" : "Food & Drink",
-            "icon" : "la-glass",
-            "list" : "50"
+            "category" : "Municípios",
+            "icon" : "la-street-view",
+            "list" : "302930"
         }
     ],
     "listing": [

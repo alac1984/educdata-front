@@ -22,7 +22,7 @@ class CategoryCardGrid4 extends Component {
                                                     <span className={"la "+icon}></span>
                                                 </div>
                                                 <h4 className="cat-name">{category}</h4>
-                                                <span className="badge badge-pill badge-success">{list} Listings</span>
+                                                <span className="badge badge-pill badge-success">{list} resultados</span>
                                             </div>
                                         </NavLink>
                                     </figcaption>
