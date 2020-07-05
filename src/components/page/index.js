@@ -53,7 +53,7 @@ class Index extends Component {
                 {/* Category section end */}
     
                 {/* Listing section start */}
-                <section className="listing-cards section-bg section-padding">
+                {/* <section className="listing-cards section-bg section-padding">
                     <div className="container">
                         <SectionTitle 
                             title="Best Listings Around the World" 
@@ -70,13 +70,13 @@ class Index extends Component {
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> */}
                 {/* Listing section end */}
                 
                 <ContentBlockHome />
     
                 {/* Place section start */}
-                <section className="places section-padding">
+                {/* <section className="places section-padding">
                     <div className="container">
                         <SectionTitle 
                             title="Destination We Love" 
@@ -91,7 +91,7 @@ class Index extends Component {
                             <PlaceList />
                         </div>
                     </div>
-                </section>
+                </section> */}
                 {/* Place section end */}
     
                 {/* Testimonial section start */}

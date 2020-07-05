@@ -1,6 +1,34 @@
 import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
+import Chart from '../../custom/landing-page-chart';
+import { css } from 'emotion';
 const noAction = e => e.preventDefault();
+const data = require('../../custom/data.json')
+const chartStyle = css`
+    width: 51vw;
+    max-width: 700px;
+    height: 72vh;
+    max-height: 590px;
+    margin-left: -3vw;
+    margin-top: -5vh;
+
+    @media (max-width: 1300px) {
+        width: 53vw;
+    }
+
+    @media (max-width: 1200px) {
+        width: 50vw;
+    }
+
+    @media (max-width: 991px) {
+        width: 40vw;
+    }
+
+    @media (max-width: 767px) {
+        width: 96vw;
+    }
+`
+
 export class ContentBlockHome extends Component {
 
     render() {
@@ -11,42 +39,44 @@ export class ContentBlockHome extends Component {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="section-title">
-                                    <h2>Why <span>Direo</span> for your Business?</h2>
-                                    <p>Explore the popular listings around the world</p>
+                                    <h2>Faça <span>comparações</span> e encontre soluções</h2>
+                                    <p>Há várias formas de utilizar nossa plataforma. Vamos à algumas delas:</p>
                                 </div>
                             </div>
                             <div className="col-lg-12">
                                 <div className="row align-items-center">
                                     <div className="col-lg-6 col-md-6">
-                                        <img src="./assets/img/svg/illustration-1.svg" alt="" className="svg" />
+                                        <div className={chartStyle}>
+                                            <Chart data={data}/>
+                                        </div>
                                     </div>
                                     <div className="col-lg-5 offset-lg-1 col-md-6 mt-5 mt-md-0">
                                         <ul className="feature-list-wrapper list-unstyled">
                                             <li>
                                                 <div className="icon"><span className="circle-secondary"><i className="la la-check-circle"></i></span></div>
                                                 <div className="list-content">
-                                                    <h4>Claim Listing</h4>
+                                                    <h4>Use o site assim</h4>
                                                     <p>Excepteur sint occaecat cupidatat non proident sunt in culpa officia deserunt mollit.</p>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div className="icon"><span className="circle-success"><i className="la la-money"></i></span></div>
                                                 <div className="list-content">
-                                                    <h4>Paid Listing</h4>
+                                                    <h4>Outra forma de fazer</h4>
                                                     <p>Excepteur sint occaecat cupidatat non proident sunt in culpa officia deserunt mollit.</p>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div className="icon"><span className="circle-primary"><i className="la la-line-chart"></i></span></div>
                                                 <div className="list-content">
-                                                    <h4>Promote your Business</h4>
+                                                    <h4>Um terceiro jeito</h4>
                                                     <p>Excepteur sint occaecat cupidatat non proident sunt in culpa officia deserunt mollit.</p>
                                                 </div>
                                             </li>
                                         </ul>{/*<!-- ends: .feature-list-wrapper -->*/}
                                         <ul className="action-btns list-unstyled">
-                                            <li><NavLink onClick={noAction} to="/at_demo" className="btn btn-success">See our Pricing</NavLink></li>
-                                            <li><NavLink onClick={noAction} to="/at_demo" className="btn btn-primary">Submit Listings</NavLink></li>
+                                            <li><NavLink onClick={noAction} to="/at_demo" className="btn btn-success">Comparar do jeito 1</NavLink></li>
+                                            <li><NavLink onClick={noAction} to="/at_demo" className="btn btn-primary">Comparar do jeito 2</NavLink></li>
                                         </ul>
                                     </div>
                                 </div>
