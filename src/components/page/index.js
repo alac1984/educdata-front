@@ -1,4 +1,5 @@
 import React, {Fragment, Component} from 'react';
+import { css } from 'emotion';
 import Header from '../layout/header';
 import { Footer } from '../layout/footer';
 import AdvSearch from '../content/element/advance-search';
@@ -95,11 +96,11 @@ class Index extends Component {
                 {/* Place section end */}
     
                 {/* Testimonial section start */}
-                <section className="testimonial-wrapper section-padding--bottom">
+                <section className="testimonial-wrapper section-padding--bottom padding-top-120">
                     <div className="container">
                         <SectionTitle 
-                            title="Trusted By Over 4000+ Users" 
-                            content="Here is what people say about Direo"
+                            title="Utilizado por mais de 4000+ usuários" 
+                            content="Veja o que os usuários falam sobre o educDATA"
                         />
                         <div className="row">
                             <Testimonial />

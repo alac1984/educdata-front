@@ -8090,6 +8090,10 @@ p {
   margin: 0 0 1.66667rem;
 }
 
+.padding-top-120 {
+  padding-top: 120px;
+}
+
 /* Responsive CSS */
 @media (min-width: 1199px) and (max-width: 1480px) {
   .search-wrapper {
