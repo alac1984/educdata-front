@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import Header from '../layout/header';
 import { Footer } from '../layout/footer';
 import { connect } from "react-redux";
@@ -17,30 +17,36 @@ import { NavLink } from 'react-router-dom';
 import { ContactForm } from '../content/element/contact-form';
 import Report from '../content/element/modal/report';
 import Clime from '../content/element/modal/clime-list';
+import { useDispatch } from 'react-redux';
+import { loadUnidade } from '../../Store/slices/selectedUnidade'
 const noAction = e => e.preventDefault();
 
 const ListingDetails = (props) => {
-    const light = props.logo[0].light;
-    const id = props.match.params.id;
-    const filter = Object.values(props.list).filter((value) => {
-        return value.id === id;
-    })
+    const dispatch = useDispatch();
+    const [logo, setLogo] = useState('')
+
+    useEffect(() => {
+        dispatch(loadUnidade(props.match.params.id));
+    }, [])
+
+    useEffect(() => {
+        setLogo(props.logo[0].light)
+    }, [logo])
 
     return (
         <Fragment>
             {/* Header section start */}
             <section className="listing-details-wrapper bgimage">
                 <div className="bg_image_holder"><img src="./assets/img/details-img.jpg" alt="" />
-                
                 </div>
                 <div className="mainmenu-wrapper">
-                    <Header logo={light} class="menu--light" />                    
+                    <Header logo={logo} class="menu--light" />                    
                 </div>
                 {/* <!-- ends: .mainmenu-wrapper --> */}
                 <div className="listing-info content_above">
                     <div className="container">
                         <div className="row">
-                            <BreadcrumbSingle filter={filter} />
+                            <BreadcrumbSingle filter={props.unidade} />
                         </div>
                     </div>
                 </div>
@@ -155,7 +161,7 @@ const ListingDetails = (props) => {
                                     <NavLink to="/all-listings-grid">View All</NavLink>
                                 </div>{/*<!-- ends: .atbd_widget_title -->*/}
                                 <div className="atbd_categorized_listings atbd_similar_listings">
-                                    <SimilarListing list={props.list} />
+                                    {/* <SimilarListing list={props.list} /> */}
                                 </div>
                             </div>
                             {/* end similar listing */}
@@ -166,7 +172,7 @@ const ListingDetails = (props) => {
                                     <NavLink to="/all-listings-grid">View All</NavLink>
                                 </div>{/*<!-- ends: .atbd_widget_title -->*/}
                                 <div className="atbd_categorized_listings atbd_popular_listings">
-                                    <PopularListing list={props.list} />
+                                    {/* <PopularListing list={props.list} /> */}
                                 </div>
                             </div>
                         </div>
@@ -182,8 +188,9 @@ const ListingDetails = (props) => {
 const mapStateToProps = (state) => {
 
     return {
-        list : state.list,
-        logo: state.logo
+        // list : state.list,
+        logo: state.logo,
+        unidade: state.selectedUnidade.unidade
     }
 }
 export default connect(mapStateToProps)(ListingDetails);

@@ -29,45 +29,46 @@ export class BreadcrumbWraper extends Component {
 export class BreadcrumbSingle extends Component {
 
     render() {
-        const { category, rating, badge, title, price} = this.props.filter[0];
+        // const { category, rating, badge, title, price} = this.props.filter[0];
+        const { id_unidade, nm_unidade, id_unidade_pai, nm_unidade_pai, cd_tipo_unidade, nm_tipo } = this.props.filter;
         return (
             <Fragment>
                 <div className="col-lg-8 col-md-7">
                     <ul className="list-unstyled listing-info--badges">
-                        <li><span className={"atbd_badge atbd_badge_"+badge}>{badge}</span></li>
-                        <li><span className="atbd_badge atbd_badge_popular">Popular</span></li>
+                        {/* <li><span className={"atbd_badge atbd_badge_"+badge}>{badge}</span></li> */}
+                        <li><span className="atbd_badge atbd_badge_popular">{nm_tipo}</span></li>
                     </ul>
                     <ul className="list-unstyled listing-info--meta">
                         <li>{/**/}
                             <span className="atbd_meta atbd_listing_average_pricing" data-toggle="tooltip" data-placement="top" title="" data-original-title="Average">
-                                {"$ "+price}
+                                {"Identificador: "+id_unidade}
                             </span>
                         </li>
                         <li>
                             <div className="average-ratings">
-                                <span className="atbd_meta atbd_listing_rating">{rating}<i className="la la-star"></i></span>
-                                <span><strong>26</strong> Reviews</span>
+                                {/* <span className="atbd_meta atbd_listing_rating">{rating}<i className="la la-star"></i></span> */}
+                                <span><strong>26</strong> comentários</span>
                             </div>
                         </li>
                         <li>
                             <div className="atbd_listing_category">
-                                <a href=" "><span className="la la-glass"></span>{category}</a>
+                                {/* <a href=" "><span className="la la-glass"></span>{category}</a> */}
                             </div>
                         </li>
                     </ul>{/*<!-- ends: .listing-info-meta -->*/}
-                    <h1>Strawberry Basil Lemonade</h1>
-                    <p className="subtitle">{title}</p>
+                    <h1>{nm_unidade}</h1>
+                    {/* <p className="subtitle">{title}</p> */}
                 </div>
                 <div className="col-lg-4 col-md-5 d-flex align-items-end justify-content-start justify-content-md-end">
                     <div className="atbd_listing_action_area">
                         <div className="atbd_action atbd_save">
                             <div className="action_button">
-                                <a href=" " onClick={noAction} className="atbdp-favourites"><span className="la la-heart-o"></span> Save</a>
+                                <a href=" " onClick={noAction} className="atbdp-favourites"><span className="la la-heart-o"></span> Salvar</a>
                             </div>
                         </div>
                         <div className="atbd_action atbd_share dropdown">
                             <span className="dropdown-toggle" id="social-links" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">
-                                <span className="la la-share"></span>Share
+                                <span className="la la-share"></span>Compartilhar
                             </span>
                             <div className="atbd_director_social_wrap dropdown-menu" aria-labelledby="social-links">
                                 <ul className="list-unstyled">
@@ -99,7 +100,7 @@ export class BreadcrumbSingle extends Component {
                         {/* <!-- Report Abuse--> */}
                         <div className="atbd_action atbd_report">
                             <div className="action_button">
-                                <a href=" " data-toggle="modal" data-target="#atbdp-report-abuse-modal"><span className="la la-flag-o"></span> Report</a>
+                                <a href=" " data-toggle="modal" data-target="#atbdp-report-abuse-modal"><span className="la la-flag-o"></span> Reportar</a>
                             </div>
                             {/* <!-- Modal (report abuse form) --> */}
                         </div>

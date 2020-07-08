@@ -151,7 +151,7 @@ class AdvSearch extends Component {
 
 const mapStateToProps = state => {
    return {
-      results: state.search.unidades
+      results: state.search.unidades.results
    }
 }
 

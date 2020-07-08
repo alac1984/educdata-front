@@ -9,9 +9,9 @@ const slice = createSlice({
       unidades: [],
    },
    reducers: {
-      searchReturned: (search, action) => {
+      unidadesReturned: (search, action) => {
          search.unidades = action.payload
-      }
+      },
    }
 })
 
@@ -21,5 +21,5 @@ export default slice.reducer
 
 export const loadUnidades = (searchTerm) => apiCallBegan({
    url: `/unidades?nome=${searchTerm}`,
-   onSuccess: slice.actions.searchReturned.type,
+   onSuccess: slice.actions.unidadesReturned.type,
 })

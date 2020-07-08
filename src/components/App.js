@@ -50,6 +50,7 @@ function App(props) {
           <Route path = '/enterprise' component = { Enterprise } />
           <Route path = '/invoice' component = { Invoice } />
           <Route path = '/add-listing' component = { AddListing } />
+          <Route path = '/unidade/:id' component = { ListingDetails } />          
                    
         </Switch>
     </Router>    
