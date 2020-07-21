@@ -1,20 +1,20 @@
-export default function searchReducer(state = {
+export default function selectedUnidadeReducer(state = {
    isFetching: false,
    haveList: false,
-   unidades: [],
+   unidade: [],
 },
    action
 ) {
    switch (action.type) {
-      case 'unidadesRequested':
+      case 'selectedUnidadeRequested':
          return Object.assign({}, state, {
             isFetching: true
          })
-      case 'unidadesReceived':
+      case 'selectedUnidadeReceived':
          return Object.assign({}, state, {
             isFetching: false,
             haveList: true,
-            unidades: action.payload
+            unidade: action.payload
          })
       default:
          return state

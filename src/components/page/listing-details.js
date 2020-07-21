@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect} from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Header from '../layout/header';
 import { Footer } from '../layout/footer';
 import { connect } from "react-redux";
@@ -12,13 +12,12 @@ import { ContactInfo } from '../content/element/contact-info';
 import { Accordion } from '../content/element/accordion';
 import { Review, AddReview } from '../content/element/review';
 import { SellerInfo, BusinessInfo, CategoryWithIcon, TagStyle, SimilarListing, PopularListing } from '../content/element/widget';
-
 import { NavLink } from 'react-router-dom';
 import { ContactForm } from '../content/element/contact-form';
 import Report from '../content/element/modal/report';
 import Clime from '../content/element/modal/clime-list';
 import { useDispatch } from 'react-redux';
-import { loadUnidade } from '../../Store/slices/selectedUnidade'
+import { selectedUnidadeRequested } from '../../Store/action/searchActions';
 const noAction = e => e.preventDefault();
 
 const ListingDetails = (props) => {
@@ -26,21 +25,22 @@ const ListingDetails = (props) => {
     const [logo, setLogo] = useState('')
 
     useEffect(() => {
-        dispatch(loadUnidade(props.match.params.id));
+        dispatch(selectedUnidadeRequested(props.match.params.id));
     }, [])
 
     useEffect(() => {
-        setLogo(props.logo[0].light)
+        setLogo("." + props.logo[0].light)
     }, [logo])
 
     return (
         <Fragment>
             {/* Header section start */}
             <section className="listing-details-wrapper bgimage">
-                <div className="bg_image_holder"><img src="./assets/img/details-img.jpg" alt="" />
+                {console.log('nm_tipo', props.unidade.nm_tipo)}
+                <div className="bg_image_holder"><img src={`../assets/img/${props.unidade.nm_tipo}.png`} alt="" />
                 </div>
                 <div className="mainmenu-wrapper">
-                    <Header logo={logo} class="menu--light" />                    
+                    <Header logo={logo} class="menu--light" />
                 </div>
                 {/* <!-- ends: .mainmenu-wrapper --> */}
                 <div className="listing-info content_above">
@@ -53,11 +53,11 @@ const ListingDetails = (props) => {
             </section>
             {/* Header section end */}
             <section className="directory_listiing_detail_area single_area section-bg section-padding-strict">
-        
+
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8">
-                            <ContentStory />  
+                            <ContentStory />
                             <div className="atbd_content_module atbd_listing_gallery">
                                 <div className="atbd_content_module__tittle_area">
                                     <div className="atbd_area_title">
@@ -65,7 +65,7 @@ const ListingDetails = (props) => {
                                     </div>
                                 </div>
                                 <Gallery />
-                            </div> 
+                            </div>
                             {/* Gallery end */}
 
                             <ListingFetures />
@@ -87,7 +87,7 @@ const ListingDetails = (props) => {
                                     </div>
                                 </div>
                                 <div className="atbdb_content_module_contents">
-                                    <div className="map" id="map-one" style={{position: 'relative'}}>
+                                    <div className="map" id="map-one" style={{ position: 'relative' }}>
                                         <Map1 />
                                     </div>
                                 </div>
@@ -109,12 +109,12 @@ const ListingDetails = (props) => {
                                     <div className="atbd_area_title">
                                         <h4><span className="la la-question-circle"></span>Lisiitng FAQ's</h4>
                                     </div>
-                                </div>                               
+                                </div>
                                 <Accordion />
                             </div>
                             {/* <!-- ends: .atbd_content_module --> */}
                             <Review />
-                            <AddReview />                            
+                            <AddReview />
                         </div>
                         <div className="col-lg-4">
                             <div className="widget atbd_widget widget-card">
@@ -138,7 +138,7 @@ const ListingDetails = (props) => {
                                     <h4><span className="la la-map-marker"></span> Sidebar Map</h4>
                                 </div>{/*<!-- ends: .atbd_widget_title -->*/}
                                 <div className="widget-body atbdb_content_module_contents">
-                                    <div className="map" id="map-two" style={{position: 'relative'}}>
+                                    <div className="map" id="map-two" style={{ position: 'relative' }}>
                                         <Map1 styles="true" />
                                     </div>
                                 </div>{/*<!-- ends: .atbdb_content_module_contents -->*/}
@@ -179,10 +179,10 @@ const ListingDetails = (props) => {
                     </div>
                 </div>
             </section>
-           <Report />
-           <Clime />
-           <Footer />
-        </Fragment> 
+            <Report />
+            <Clime />
+            <Footer />
+        </Fragment>
     )
 }
 const mapStateToProps = (state) => {

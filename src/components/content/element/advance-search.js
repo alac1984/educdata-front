@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 import Typewriter from 'typewriter-effect';
-import { loadUnidades } from '../../../Store/slices/search'
+import { unidadesRequested } from '../../../Store/action/searchActions'
 const noAction = e => e.preventDefault();
 
 
@@ -67,13 +67,20 @@ let searchTerm = ''
 
 class AdvSearch extends Component {
    state = {
+      typing: false,
+      timeout: 0,
+
+      // Used only for making the heading disappear when typing
       searching: false
    }
 
    handleChange = (e) => {
       this.searching = true
       searchTerm = e.target.value
-      this.props.dispatch(loadUnidades(searchTerm))
+      if(this.timeout) clearTimeout(this.timeout)
+      this.timeout = setTimeout(() => {
+         this.props.dispatch(unidadesRequested(searchTerm))
+      }, 300)
       if (searchTerm === '') {
          this.searching = false
       }

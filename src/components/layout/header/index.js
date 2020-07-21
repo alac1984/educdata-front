@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { LogOut } from '../../../Store/action/logoutAction';
 const noAction = e => e.preventDefault();
 class Header extends Component {    
+
     render() {
                       
         const logdIn = () => {
@@ -14,6 +15,7 @@ class Header extends Component {
             e.preventDefault();
             this.props.logOutdata(null);
        }
+
         return (
             <Fragment>
             
@@ -25,7 +27,7 @@ class Header extends Component {
                                     <div className="menu-fullwidth d-flex justify-content-between">
                                         <div className="logo-wrapper order-lg-0 order-sm-1">
                                             <div className="logo logo-top">
-                                                <NavLink to="/"><img src={this.props.logo} alt="logoImage" className="img-fluid"/></NavLink>
+                                                <NavLink to="/"><img src={this.props.logo} alt="logoImage" className="img-fluid" /></NavLink>
                                             </div>
                                         </div>{/*<!-- ends: .logo-wrapper -->*/}
                                         <div className="menu-container">

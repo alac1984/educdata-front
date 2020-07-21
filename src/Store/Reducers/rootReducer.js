@@ -10,8 +10,8 @@ import blogReducer from './blogReducer';
 import usersReducer from './usersReducer';
 import loginReducer from './loginReducer';
 import logoReducer from './logoReducer';
-import searchReducer from '../slices/search'
-import selectedUnidadeReducer from '../slices/selectedUnidade'
+import searchReducer from '../Reducers/searchReducer'
+import selectedUnidadeReducer from '../Reducers/selectedUnidadeReducer'
 
 const rootReducer = combineReducers({
     category: catReducer,
