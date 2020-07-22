@@ -22,6 +22,11 @@ import CheckoutAdvanced from './page/advanced';
 import Enterprise from './page/enterprise';
 import Invoice from './page/invoice';
 import AddListing from './page/add-listing';
+import reportBrasil from './page/reportBrasil'
+import reportRegiao from './page/reportRegiao'
+import reportEstado from './page/reportEstado'
+import reportMunicipio from './page/reportMunicipio'
+import reportEscola from './page/reportEscola'
  
 
 function App(props) {  
@@ -50,7 +55,11 @@ function App(props) {
           <Route path = '/enterprise' component = { Enterprise } />
           <Route path = '/invoice' component = { Invoice } />
           <Route path = '/add-listing' component = { AddListing } />
-          <Route path = '/unidade/:id' component = { ListingDetails } />          
+          <Route path = '/unidade/brasil/:id' component = { reportBrasil} />          
+          <Route path = '/unidade/regiao/:id' component = { reportRegiao} />          
+          <Route path = '/unidade/estado/:id' component = { reportEstado } />          
+          <Route path = '/unidade/municipio/:id' component = { reportMunicipio } />          
+          <Route path = '/unidade/escola/:id' component = { reportEscola } />          
                    
         </Switch>
     </Router>    

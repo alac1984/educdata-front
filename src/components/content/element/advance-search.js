@@ -130,9 +130,36 @@ class AdvSearch extends Component {
                                           <li className={itemStyle} key={unidade.id_unidade}>
                                              <div className={itemContainerStyle}>
                                                 <div className={unidadeStyle}>
-                                                   <Link to={'/unidade/' + unidade.id_unidade}>
-                                                      {unidade.nm_unidade}
-                                                   </Link>
+                                                   {/* Link if it is ESCOLA */}
+                                                   {unidade.cd_tipo_unidade === 5 ? (
+                                                      <Link to={'/unidade/escola/' + unidade.id_unidade}>
+                                                         {unidade.nm_unidade}
+                                                      </Link>
+                                                   ) : null}
+                                                   {/* Link if it is MUNICÍPIO */}
+                                                   {unidade.cd_tipo_unidade === 4 ? (
+                                                      <Link to={'/unidade/municipio/' + unidade.id_unidade}>
+                                                         {unidade.nm_unidade}
+                                                      </Link>
+                                                   ) : null}
+                                                   {/* Link if it is ESTADO */}
+                                                   {unidade.cd_tipo_unidade === 3 ? (
+                                                      <Link to={'/unidade/estado/' + unidade.id_unidade}>
+                                                         {unidade.nm_unidade}
+                                                      </Link>
+                                                   ) : null}
+                                                   {/* Link if it is REGIÃO*/}
+                                                   {unidade.cd_tipo_unidade === 2 ? (
+                                                      <Link to={'/unidade/regiao/' + unidade.id_unidade}>
+                                                         {unidade.nm_unidade}
+                                                      </Link>
+                                                   ) : null}
+                                                   {/* Link if it is BRASIL */}
+                                                   {unidade.cd_tipo_unidade === 1 ? (
+                                                      <Link to={'/unidade/brasil/' + unidade.id_unidade}>
+                                                         {unidade.nm_unidade}
+                                                      </Link>
+                                                   ) : null}
                                                 </div>
                                                 <ul className={informationStyle}>
                                                    <li>ID: {unidade.id_unidade}</li>
