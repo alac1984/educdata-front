@@ -16,7 +16,9 @@ const ulStyle = css`
 
 const itemStyle = css`
    text-align: left;
-
+   text-transform: uppercase;
+   font-size: 14px;
+   font-weight: bold;
    &:hover {
       background-color: #f5f7fc;
    }
@@ -38,7 +40,7 @@ const unidadeStyle = css`
    grid-column: 1 / 1;
    margin: 0;
    align-self: center;
-   font-size: 17px;
+   font-size: 15px;
 
    @media (max-width: 767.98px) {
       font-size: 15px;
@@ -63,15 +65,33 @@ const informationStyle = css`
    }
 `
 
+const idSpanStyle = css`
+   font-style: italic;
+   font-size: 12px;
+`
+
 let searchTerm = ''
 
 class AdvSearch extends Component {
    state = {
       typing: false,
       timeout: 0,
-
       // Used only for making the heading disappear when typing
       searching: false
+   }
+   componentDidMount(){
+      document.addEventListener("keydown", this.escFunction, false);
+   }
+   componentWillUnmount(){
+      document.removeEventListener("keydown", this.escFunction, false);
+   }
+
+   escFunction(e){
+      if(e.keyCode === 27) {
+         console.log('this.searching1: ', this.searching)
+         this.searching = false;
+         console.log('this.searching2: ', this.searching)
+      }
    }
 
    handleChange = (e) => {
@@ -113,7 +133,6 @@ class AdvSearch extends Component {
                                  }} /></h2>
                                  <p className="sub_title">Bem-vindo ao educDATA. Nosso trabalho é fornecer dados sobre a educação brasileira.</p>
                               </div>
-
                            ) : null}
                         </div>{/* ends: .search_title_area */}
                         <form action="/" className="search_form">
@@ -133,43 +152,82 @@ class AdvSearch extends Component {
                                                    {/* Link if it is ESCOLA */}
                                                    {unidade.cd_tipo_unidade === 5 ? (
                                                       <Link to={'/unidade/escola/' + unidade.id_unidade}>
-                                                         {unidade.nm_unidade}
+                                                         <div className={itemContainerStyle}>
+                                                            <div className={unidadeStyle}>
+                                                               <div className={css`display: flex; flex-direction: column;`}>
+                                                                     {unidade.nm_unidade}
+                                                                  <span className={idSpanStyle}>ID: {unidade.id_unidade}</span>
+                                                               </div>
+                                                            </div>
+                                                         </div>
                                                       </Link>
                                                    ) : null}
                                                    {/* Link if it is MUNICÍPIO */}
                                                    {unidade.cd_tipo_unidade === 4 ? (
                                                       <Link to={'/unidade/municipio/' + unidade.id_unidade}>
-                                                         {unidade.nm_unidade}
+                                                         <div className={itemContainerStyle}>
+                                                            <div className={unidadeStyle}>
+                                                               <div className={css`display: flex; flex-direction: column;`}>
+                                                                  {unidade.nm_unidade}
+                                                               <span className={idSpanStyle}>ID: {unidade.id_unidade}</span>
+                                                               </div>
+                                                            </div>
+                                                         </div>
                                                       </Link>
                                                    ) : null}
                                                    {/* Link if it is ESTADO */}
                                                    {unidade.cd_tipo_unidade === 3 ? (
                                                       <Link to={'/unidade/estado/' + unidade.id_unidade}>
-                                                         {unidade.nm_unidade}
+                                                         <div className={itemContainerStyle}>
+                                                            <div className={unidadeStyle}>
+                                                               <div className={css`display: flex; flex-direction: column;`}>
+                                                                  {unidade.nm_unidade}
+                                                               <span className={idSpanStyle}>ID: {unidade.id_unidade}</span>
+                                                               </div>
+                                                            </div>
+                                                         </div>
                                                       </Link>
                                                    ) : null}
                                                    {/* Link if it is REGIÃO*/}
                                                    {unidade.cd_tipo_unidade === 2 ? (
                                                       <Link to={'/unidade/regiao/' + unidade.id_unidade}>
-                                                         {unidade.nm_unidade}
+                                                         <div className={itemContainerStyle}>
+                                                            <div className={unidadeStyle}>
+                                                               <div className={css`display: flex; flex-direction: column;`}>
+                                                                  {unidade.nm_unidade}
+                                                                  <span className={idSpanStyle}>ID: {unidade.id_unidade}</span>
+                                                               </div>
+                                                            </div>
+                                                         </div>
                                                       </Link>
                                                    ) : null}
                                                    {/* Link if it is BRASIL */}
                                                    {unidade.cd_tipo_unidade === 1 ? (
                                                       <Link to={'/unidade/brasil/' + unidade.id_unidade}>
-                                                         {unidade.nm_unidade}
+                                                         <div className={itemContainerStyle}>
+                                                            <div className={unidadeStyle}>
+                                                               <div className={css`display: flex; flex-direction: column;`}>
+                                                                  {unidade.nm_unidade}
+                                                                  <span className={idSpanStyle}>ID: {unidade.id_unidade}</span>
+                                                               </div>
+                                                            </div>
+                                                         </div>
                                                       </Link>
                                                    ) : null}
+                                                   {/* Mostrar mais resultados */}
                                                 </div>
                                                 <ul className={informationStyle}>
-                                                   <li>ID: {unidade.id_unidade}</li>
-                                                   <li>Tipo: {unidade.nm_tipo}</li>
-                                                   <li>Local: {unidade.nm_unidade_pai}</li>
+                                                   <li><span className='badge badge-secondary'>{unidade.nm_tipo}</span></li>
+                                                   <li><span className='badge badge-primary'>{unidade.nm_unidade_pai}</span></li>
                                                 </ul>
                                              </div>
                                           </li>
                                        ))
                                     ) : console.log('não')}
+
+                                    <Link to={'/mais-resultados?busca=' + searchTerm}>
+                                       Mostrar mais resultados
+                                    </Link>
                                  </ul>
                               ) : null}
                            </div>

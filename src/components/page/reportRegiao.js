@@ -29,7 +29,7 @@ const ReportRegiao = (props) => {
     }, [])
 
     useEffect(() => {
-        setLogo("." + props.logo[0].light)
+        setLogo('../../' + props.logo[0].light)
     }, [logo])
 
     return (

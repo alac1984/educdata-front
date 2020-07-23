@@ -26,17 +26,18 @@ const ListingDetails = (props) => {
 
     useEffect(() => {
         dispatch(selectedUnidadeRequested(props.match.params.id));
-    }, [])
-
-    useEffect(() => {
         setLogo("." + props.logo[0].light)
+        console.log('I got here')
     }, [logo])
+
+    // useEffect(() => {
+    //     console.log('I got here')
+    // }, [logo])
 
     return (
         <Fragment>
             {/* Header section start */}
             <section className="listing-details-wrapper bgimage">
-                {console.log('nm_tipo', props.unidade.nm_tipo)}
                 <div className="bg_image_holder"><img src={`../assets/img/${props.unidade.nm_tipo}.png`} alt="" />
                 </div>
                 <div className="mainmenu-wrapper">

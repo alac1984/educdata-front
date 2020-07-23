@@ -1,5 +1,4 @@
 import axios from 'axios'
-import * as actions from '../action/apiActions'
 
 const api = ({ dispatch }) => next => async action => {
    if(

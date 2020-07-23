@@ -3,7 +3,7 @@ export const unidadesRequested = searchTerm => {
    return {
       type: 'unidadesRequested',
       payload: {
-         url: `/unidades?nome=${searchTerm}`,
+         url: `/unidades?busca=${searchTerm}`,
          method: 'get',
          onSuccess: 'unidadesReceived',
          onError: 'unidadesRequestFailed'
