@@ -1,7 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Header from '../layout/header';
 import { Footer } from '../layout/footer';
-import { connect } from "react-redux";
 import { BreadcrumbSingle } from '../content/element/breadcrumb';
 import { ContentStory } from '../content/element/listing-details-story';
 import Gallery from '../content/element/carousel/gallery';
@@ -16,12 +15,14 @@ import { NavLink } from 'react-router-dom';
 import { ContactForm } from '../content/element/contact-form';
 import Report from '../content/element/modal/report';
 import Clime from '../content/element/modal/clime-list';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectedUnidadeRequested } from '../../Store/action/searchActions';
 const noAction = e => e.preventDefault();
 
 const ReportMunicipio = (props) => {
     const dispatch = useDispatch();
+    const logoUrl = useSelector(state => state.logo[0].light)
+    const unidade = useSelector(state => state.selectedUnidade.unidade)
     const [logo, setLogo] = useState('')
 
     useEffect(() => {
@@ -29,15 +30,14 @@ const ReportMunicipio = (props) => {
     }, [])
 
     useEffect(() => {
-        setLogo('../../' + props.logo[0].light)
+        setLogo('../../' + logoUrl)
     }, [logo])
 
     return (
         <Fragment>
             {/* Header section start */}
             <section className="listing-details-wrapper bgimage">
-                {console.log('nm_tipo', props.unidade.nm_tipo)}
-                <div className="bg_image_holder"><img src={`../assets/img/${props.unidade.nm_tipo}.png`} alt="" />
+                <div className="bg_image_holder"><img src={'../../../../img/Município.png'} alt="" />
                 </div>
                 <div className="mainmenu-wrapper">
                     <Header logo={logo} class="menu--light" />
@@ -46,7 +46,7 @@ const ReportMunicipio = (props) => {
                 <div className="listing-info content_above">
                     <div className="container">
                         <div className="row">
-                            <BreadcrumbSingle filter={props.unidade} />
+                            <BreadcrumbSingle filter={unidade} />
                         </div>
                     </div>
                 </div>
@@ -185,12 +185,5 @@ const ReportMunicipio = (props) => {
         </Fragment>
     )
 }
-const mapStateToProps = (state) => {
 
-    return {
-        // list : state.list,
-        logo: state.logo,
-        unidade: state.selectedUnidade.unidade
-    }
-}
-export default connect(mapStateToProps)(ReportMunicipio);
+export default ReportMunicipio;

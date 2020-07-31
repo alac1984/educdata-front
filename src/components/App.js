@@ -57,7 +57,7 @@ function App(props) {
           <Route path = '/add-listing' component = { AddListing } />
           <Route path = '/unidade/brasil/:id' component = { reportBrasil} />          
           <Route path = '/unidade/regiao/:id' component = { reportRegiao} />          
-          <Route path = '/unidade/estado/:id' component = { reportEstado } />          
+          <Route exact path = '/unidade/estado/:id' component = { reportEstado } />          
           <Route path = '/unidade/municipio/:id' component = { reportMunicipio } />          
           <Route path = '/unidade/escola/:id' component = { reportEscola } />          
                    

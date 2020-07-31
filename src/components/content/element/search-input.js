@@ -88,7 +88,7 @@ const SearchInput = () => {
    const debouncedUnidadesRequested = useRef(
       debounce(
          (query, cancelToken) => dispatch(unidadesRequested(query, cancelToken)),
-         300
+         150
       )
    ).current
 
