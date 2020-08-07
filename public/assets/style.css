@@ -3996,6 +3996,7 @@ p {
 .listing-details-wrapper {
   position: relative;
   height: 30rem;
+  background-color: #f5f7fc;
 }
 
 .listing-details-wrapper:before {
@@ -4015,7 +4016,7 @@ p {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 82%;
+  height: 58%;
 }
 
 .listing-info .listing-info--meta {

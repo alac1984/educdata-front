@@ -2,6 +2,7 @@
 .listing-details-wrapper{
   position: relative;
   height: remy(450px);
+  background-color: #f5f7fc;
   &:before{
     position: absolute;
     content: '';
@@ -15,7 +16,7 @@
 .listing-info{
   display: flex;
   align-items: center;
-  height: 82%;
+  height: 58%;
   .listing-info--meta{
     display: flex;
     flex-wrap: wrap;

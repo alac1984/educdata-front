@@ -1,5 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import { Map, GoogleApiWrapper, Marker  } from 'google-maps-react';
+import { cityInfoRequested } from '../../../Store/action/searchActions'
 
 var map3Style = [
     {
@@ -189,20 +191,33 @@ const mapStyles2 = {
     };
   
 const Map1 = (props) => {
+    const [lat, setLat] = useState()
+    const [long, setLong] = useState()
+
+    useEffect(() => {
+        console.log('props.lat: ', props.lat)
+        console.log('props.long: ', props.long)
+        setLat(props.lat)
+        setLong(props.long)
+        console.log('lat: ', lat)
+        console.log('long: ', long)
+    }, [props.lat, props.long])
     return (
         <Fragment>            
-            <Map
-                google={props.google}
-                zoom={13}                    
-                styles={map3Style}
-                style={!props.styles ? mapStyles : mapStyles2}
-                initialCenter={{ lat: 50.797897, lng: -1.077641 }}
-            >
-                <Marker position={{ lat: 50.797897, lng: -1.077641}} icon= './assets/img/marker.png' />
-            </Map>                
+            {lat && long ? (
+                <Map
+                    google={props.google}
+                    zoom={props.zoom}                    
+                    styles={map3Style}
+                    style={!props.styles ? mapStyles : mapStyles2}
+                    initialCenter={{ lat: lat , lng: long }}
+                >
+                    <Marker position={{ lat: lat , lng: long}} icon= '../../assets/img/marker.png' />
+                </Map>                
+            ): null}
         </Fragment>
     )
 }
 export default GoogleApiWrapper({
-    apiKey: 'AIzaSyDduF2tLXicDEPDMAtC6-NLOekX0A5vlnY'
+    apiKey: 'AIzaSyChkvrpCamiks52u9Dn7EaWGJQn46HkFLs'
   })(Map1);

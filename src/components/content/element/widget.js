@@ -1,7 +1,115 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 const noAction = e => e.preventDefault();
+
+export const MunicipioInfo = (props) => {
+
+    return (
+        <Fragment>
+            <div className="widget-body atbd_author_info_widget">
+                <div className="atbd_avatar_wrapper">
+                    <div className="atbd_review_avatar">
+                        <img src="../../assets/img/avatar-60x60.jpg" alt="AvatarImage" />
+                    </div>
+                    <div className="atbd_name_time">
+                        <h4>{props.name} <span className="verified" data-toggle="tooltip" data-placement="top" title="Verified"></span></h4>
+                        <span className="review_time">{props.type}</span>
+                    </div>
+                </div>
+                {/* <!-- ends: .atbd_avatar_wrapper --> */}
+                <div className="atbd_widget_contact_info">
+                    <ul>
+                        <li>
+                            <span className="la la-map-marker"></span>
+                            <span className="atbd_info">UF: {props.address}</span>
+                        </li>
+                        <li>
+                            <span className="la la-map-marker"></span>
+                            <span className="atbd_info">Messoregião: {props.address}</span>
+                        </li>
+                        <li>
+                            <span className="la la-map-marker"></span>
+                            <span className="atbd_info">Microregião: {props.address}</span>
+                        </li>
+                    </ul>
+                </div>
+                {/* <!-- ends: .atbd_widget_contact_info --> */}
+            </div>
+        </Fragment>
+    )
+}
+
+export const StateInfo = (props) => {
+
+    return (
+        <Fragment>
+            <div className="widget-body atbd_author_info_widget">
+                <div className="atbd_avatar_wrapper">
+                    <div className="atbd_review_avatar">
+                        <img src="../../assets/img/avatar-60x60.jpg" alt="AvatarImage" />
+                    </div>
+                    <div className="atbd_name_time">
+                        <h4>{props.name} <span className="verified" data-toggle="tooltip" data-placement="top" title="Verified"></span></h4>
+                        <span className="review_time">{props.type}</span>
+                    </div>
+                </div>
+                {/* <!-- ends: .atbd_avatar_wrapper --> */}
+                <div className="atbd_widget_contact_info">
+                    <ul>
+                        <li>
+                            <span className="la la-map-marker"></span>
+                            <span className="atbd_info">UF: {props.address}</span>
+                        </li>
+                        <li>
+                            <span className="la la-map-marker"></span>
+                            <span className="atbd_info">Messoregião: {props.address}</span>
+                        </li>
+                        <li>
+                            <span className="la la-map-marker"></span>
+                            <span className="atbd_info">Microregião: {props.address}</span>
+                        </li>
+                    </ul>
+                </div>
+                {/* <!-- ends: .atbd_widget_contact_info --> */}
+            </div>
+        </Fragment>
+    )
+}
+
+export const EscolaInfo = (props) => {
+
+    return (
+        <Fragment>
+            <div className="widget-body atbd_author_info_widget">
+                <div className="atbd_avatar_wrapper">
+                    <div className="atbd_review_avatar">
+                        <img src="../../assets/img/avatar-60x60.jpg" alt="AvatarImage" />
+                    </div>
+                    <div className="atbd_name_time">
+                        <h4>{props.name} <span className="verified" data-toggle="tooltip" data-placement="top" title="Verified"></span></h4>
+                        <span className="review_time">{props.type}</span>
+                    </div>
+                </div>
+                {/* <!-- ends: .atbd_avatar_wrapper --> */}
+                <div className="atbd_widget_contact_info">
+                    <ul>
+                        <li>
+                            <span className="la la-map-marker"></span>
+                            <span className="atbd_info">{props.address}</span>
+                        </li>
+                        <li>
+                            <span className="la la-phone"></span>
+                            <span className="atbd_info">{props.phone}</span>
+                        </li>
+                    </ul>
+                </div>
+                {/* <!-- ends: .atbd_widget_contact_info --> */}
+            </div>
+        </Fragment>
+    )
+}
 
 export class SellerInfo extends Component {
     render() {
@@ -161,7 +269,7 @@ export class TagStyle extends Component {
     render() {
         return (
             <Fragment>
-                 <div className="widget atbd_widget widget-card">
+                <div className="widget atbd_widget widget-card">
                     <div className="atbd_widget_title">
                         <h4><span className="la la-tags"></span> Tag Style</h4>
                     </div>
@@ -189,40 +297,40 @@ export class SimilarListing extends Component {
         return (
             <Fragment>
                 <ul className="listings">
-                {
-                    Object.values(this.props.list).slice(0, 4).map((value, key) => {
-                         return (
-                            <li key={key}>
-                                <div className="atbd_left_img">
-                                    <NavLink to={"listing-details"+value.id}><img src={value.img} style={{width: "90px"}} alt="listingimage" /></NavLink>
-                                </div>
-                                <div className="atbd_right_content">
-                                    <div className="cate_title">
-                                        <h4><NavLink to={"listing-details"+value.id}>{value.title}</NavLink></h4>
+                    {
+                        Object.values(this.props.list).slice(0, 4).map((value, key) => {
+                            return (
+                                <li key={key}>
+                                    <div className="atbd_left_img">
+                                        <NavLink to={"listing-details" + value.id}><img src={value.img} style={{ width: "90px" }} alt="listingimage" /></NavLink>
                                     </div>
-                                    <p className="listing_value">
-                                        <span>$25,800</span>
-                                    </p>
-                                    <p className="directory_tag">
-                                        <span className="la la-cutlery" aria-hidden="true"></span>
-                                        <span>
-                                            <NavLink to="/at_demo" onClick={noAction}>Food & Drink</NavLink>
-                                            <span className="atbd_cat_popup">+3
+                                    <div className="atbd_right_content">
+                                        <div className="cate_title">
+                                            <h4><NavLink to={"listing-details" + value.id}>{value.title}</NavLink></h4>
+                                        </div>
+                                        <p className="listing_value">
+                                            <span>$25,800</span>
+                                        </p>
+                                        <p className="directory_tag">
+                                            <span className="la la-cutlery" aria-hidden="true"></span>
+                                            <span>
+                                                <NavLink to="/at_demo" onClick={noAction}>Food & Drink</NavLink>
+                                                <span className="atbd_cat_popup">+3
                                                 <span className="atbd_cat_popup_wrapper">
-                                                    <span>
-                                                        <NavLink to="/at_demo" onClick={noAction}>Food<span>,</span></NavLink>
-                                                        <NavLink to="/at_demo" onClick={noAction}>Others<span>,</span></NavLink>
-                                                        <NavLink to="/at_demo" onClick={noAction}>Service<span>,</span></NavLink>
+                                                        <span>
+                                                            <NavLink to="/at_demo" onClick={noAction}>Food<span>,</span></NavLink>
+                                                            <NavLink to="/at_demo" onClick={noAction}>Others<span>,</span></NavLink>
+                                                            <NavLink to="/at_demo" onClick={noAction}>Service<span>,</span></NavLink>
+                                                        </span>
                                                     </span>
-                                                </span>
-                                            </span>{/*<!-- ends: .atbd_cat_popup -->*/}
-                                        </span>
-                                    </p>
-                                </div>
-                            </li>
-                         )
-                     })
-                }
+                                                </span>{/*<!-- ends: .atbd_cat_popup -->*/}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </li>
+                            )
+                        })
+                    }
                 </ul>
             </Fragment>
         )
@@ -234,40 +342,40 @@ export class PopularListing extends Component {
         return (
             <Fragment>
                 <ul className="listings">
-                {
-                    Object.values(this.props.list).slice(0, 4).map((value, key) => {
-                         return (
-                            <li key={key}>
-                                <div className="atbd_left_img">
-                                    <NavLink to={"listing-details"+value.id}><img src={value.img} style={{width: "90px"}} alt="listingimage" /></NavLink>
-                                </div>
-                                <div className="atbd_right_content">
-                                    <div className="cate_title">
-                                        <h4><NavLink to={"listing-details"+value.id}>{value.title}</NavLink></h4>
+                    {
+                        Object.values(this.props.list).slice(0, 4).map((value, key) => {
+                            return (
+                                <li key={key}>
+                                    <div className="atbd_left_img">
+                                        <NavLink to={"listing-details" + value.id}><img src={value.img} style={{ width: "90px" }} alt="listingimage" /></NavLink>
                                     </div>
-                                    <p className="listing_value">
-                                        <span>$25,800</span>
-                                    </p>
-                                    <p className="directory_tag">
-                                        <span className="la la-cutlery" aria-hidden="true"></span>
-                                        <span>
-                                            <NavLink to="/at_demo" onClick={noAction}>Food & Drink</NavLink>
-                                            <span className="atbd_cat_popup">+3
+                                    <div className="atbd_right_content">
+                                        <div className="cate_title">
+                                            <h4><NavLink to={"listing-details" + value.id}>{value.title}</NavLink></h4>
+                                        </div>
+                                        <p className="listing_value">
+                                            <span>$25,800</span>
+                                        </p>
+                                        <p className="directory_tag">
+                                            <span className="la la-cutlery" aria-hidden="true"></span>
+                                            <span>
+                                                <NavLink to="/at_demo" onClick={noAction}>Food & Drink</NavLink>
+                                                <span className="atbd_cat_popup">+3
                                                 <span className="atbd_cat_popup_wrapper">
-                                                    <span>
-                                                        <NavLink to="/at_demo" onClick={noAction}>Food<span>,</span></NavLink>
-                                                        <NavLink to="/at_demo" onClick={noAction}>Others<span>,</span></NavLink>
-                                                        <NavLink to="/at_demo" onClick={noAction}>Service<span>,</span></NavLink>
+                                                        <span>
+                                                            <NavLink to="/at_demo" onClick={noAction}>Food<span>,</span></NavLink>
+                                                            <NavLink to="/at_demo" onClick={noAction}>Others<span>,</span></NavLink>
+                                                            <NavLink to="/at_demo" onClick={noAction}>Service<span>,</span></NavLink>
+                                                        </span>
                                                     </span>
-                                                </span>
-                                            </span>{/*<!-- ends: .atbd_cat_popup -->*/}
-                                        </span>
-                                    </p>
-                                </div>
-                            </li>
-                         )
-                     })
-                }
+                                                </span>{/*<!-- ends: .atbd_cat_popup -->*/}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </li>
+                            )
+                        })
+                    }
                 </ul>
             </Fragment>
         )
@@ -316,7 +424,7 @@ export class Category extends Component {
     render() {
         return (
             <Fragment>
-                 <div className="widget-wrapper">
+                <div className="widget-wrapper">
                     <div className="widget-default">
                         <div className="widget-header">
                             <h6 className="widget-title">Categories</h6>
@@ -344,7 +452,7 @@ export class PopularPost extends Component {
     render() {
         return (
             <Fragment>
-               <div className="widget-wrapper">
+                <div className="widget-wrapper">
                     <div className="widget-default">
                         <div className="widget-header">
                             <h6 className="widget-title">Popular Post</h6>
@@ -356,10 +464,10 @@ export class PopularPost extends Component {
                                         return (
                                             <div className="post-single" key={key}>
                                                 <div className="d-flex align-items-center">
-                                                    <NavLink to={'blog-details'+value.id}><img src={value.imgSrc} alt="" style={{width: "90px"}} /></NavLink>
+                                                    <NavLink to={'blog-details' + value.id}><img src={value.imgSrc} alt="" style={{ width: "90px" }} /></NavLink>
                                                     <p><span>{value.date}</span> <span>by <a href="http://aazztech.com">Aazztech</a></span></p>
                                                 </div>
-                                                <NavLink to={'blog-details'+value.id} className="post-title">{value.title.split("").slice(0, 30)}</NavLink>
+                                                <NavLink to={'blog-details' + value.id} className="post-title">{value.title.split("").slice(0, 30)}</NavLink>
                                             </div>
                                         )
                                     })
@@ -378,7 +486,7 @@ export class RecentPost extends Component {
     render() {
         return (
             <Fragment>
-               <div className="widget-wrapper">
+                <div className="widget-wrapper">
                     <div className="widget-default">
                         <div className="widget-header">
                             <h6 className="widget-title">Recent Post</h6>
@@ -390,10 +498,10 @@ export class RecentPost extends Component {
                                         return (
                                             <div className="post-single" key={key}>
                                                 <div className="d-flex align-items-center">
-                                                    <NavLink to={'blog-details'+value.id}><img src={value.imgSrc} alt="" style={{width: "90px"}} /></NavLink>
+                                                    <NavLink to={'blog-details' + value.id}><img src={value.imgSrc} alt="" style={{ width: "90px" }} /></NavLink>
                                                     <p><span>{value.date}</span> <span>by <a href="http://aazztech.com">Aazztech</a></span></p>
                                                 </div>
-                                                <NavLink to={'blog-details'+value.id} className="post-title">{value.title.split("").slice(0, 30)}</NavLink>
+                                                <NavLink to={'blog-details' + value.id} className="post-title">{value.title.split("").slice(0, 30)}</NavLink>
                                             </div>
                                         )
                                     })
@@ -412,7 +520,7 @@ export class PopularTags extends Component {
     render() {
         return (
             <Fragment>
-               <div className="widget-wrapper">
+                <div className="widget-wrapper">
                     <div className="widget-default">
                         <div className="widget-header">
                             <h6 className="widget-title">Popular Tags</h6>
@@ -443,7 +551,7 @@ export class StayUpdate extends Component {
     render() {
         return (
             <Fragment>
-              <div className="widget-wrapper">
+                <div className="widget-wrapper">
                     <div className="widget-default">
                         <div className="widget-header">
                             <h6 className="widget-title">Stay Updated</h6>
@@ -467,7 +575,7 @@ export class ConnentFollow extends Component {
     render() {
         return (
             <Fragment>
-              <div className="widget-wrapper">
+                <div className="widget-wrapper">
                     <div className="widget-default">
                         <div className="widget-header">
                             <h6 className="widget-title">Connect &amp; Follow</h6>
