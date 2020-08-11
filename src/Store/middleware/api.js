@@ -9,6 +9,7 @@ const api = ({ dispatch }) => next => async action => {
       action.type !== actions.cityInfoRequested &&
       action.type !== actions.schoolInfoRequested &&
       action.type !== actions.stateInfoRequested &&
+      action.type !== actions.idebInfoRequested &&
       action.type !== actions.painelInfoRequested
    ) {
       return next(action)

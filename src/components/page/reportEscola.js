@@ -7,7 +7,7 @@ import { EscolaInfo } from '../content/element/widget';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserClock } from '@fortawesome/free-solid-svg-icons'
-import { 
+import {
     selectedUnidadeRequested,
     schoolInfoRequested,
     painelInfoRequested
@@ -15,16 +15,26 @@ import {
 import { css, cx } from 'emotion';
 
 const noAction = e => e.preventDefault();
+
 const infoItem = css`
     display: flex;
     flex: 1;
     flex-direction: column;
     min-width: 200px;
     justify-content: center;
-    align-items: center;
-    background-color: #EDEDED;
-    height: 200px;
-    border: 1px solid #B0BEA9;
+    align-items: flex-start;
+    padding-left: 15px;
+    height: 120px;
+`
+
+const infoItemContent = css`
+    display: flex;
+    flex-direction: column;
+    font-size: 17px;
+    width: 100%;
+    height: 65%;
+    color: #272b41;
+    border-right: 1px solid #272b41;
 `
 const noBorderRight = css`
     border-right: none;
@@ -89,35 +99,31 @@ const ReportEscola = (props) => {
                                 <div className={css`
                                     display: flex; 
                                     flex-wrap: wrap;
-                                    justify-content: center;
                                 `}>
                                     {showPainelInfo ? (
-                                        painelInfo.map(indicador => (
-                                            <div className={infoItem} key={indicador.id_painel_indicadores}>
-                                                <div className={css`
-                                                    font-size: 17px;
-                                                    font-weight: bold;
-                                                `}>{indicador.ds_indicador}</div>
-                                                <div className={css`
-                                                    font-size: 13px;
-                                                `}>{indicador.ds_complemento ? indicador.ds_complemento : null}</div>
-                                                <div className={css`
-                                                    font-size: 30px;
-                                                    font-weight: 700;
-                                                `}>{indicador.nr_valor}{indicador.ds_medida ? indicador.ds_medida : null}</div>
-                                                <div className={css`
-                                                    font-size: 15px;
-                                                `}>{indicador.nr_diferenca_meta ? `Para a meta: ${indicador.nr_diferenca_meta}` : null}</div>
-                                                <div className={css`
-                                                    justify-self: end;
-                                                    font-size: 11px;
-                                                `}>Fonte: {indicador.ds_fonte}</div>
-                                                <div className={css`
-                                                    justify-self: end;
-                                                    font-size: 11px;
-                                                `}>Edição: {indicador.ds_edicao}</div>
+                                        <Fragment>
+                                            <div className={infoItem}>
+                                                <div className={infoItemContent}>
+                                                    <div className={css`font-weight: bold;`}>{painelInfo[3].ds_indicador}</div>
+                                                    <div className={css`font-size: 22px;`}>{painelInfo[3].nr_valor.replace('.0', '')}</div>
+                                                    <div className={css`font-size: 10px;`}>Fonte:{painelInfo[0].ds_fonte}</div>
+                                                </div>
                                             </div>
-                                        ))
+                                            <div className={infoItem}>
+                                                <div className={infoItemContent}>
+                                                    <div className={css`font-weight: bold;`}>{painelInfo[2].ds_indicador}</div>
+                                                    <div className={css`font-size: 22px;`}>{painelInfo[2].nr_valor}</div>
+                                                    <div className={css`font-size: 10px;`}>Fonte:{painelInfo[0].ds_fonte}</div>
+                                                </div>
+                                            </div>
+                                            <div className={infoItem}>
+                                                <div className={cx(infoItemContent, noBorderRight)}>
+                                                    <div className={css`font-weight: bold;`}>{painelInfo[0].ds_indicador}</div>
+                                                    <div className={css`font-size: 22px;`}>{painelInfo[0].nr_valor}{painelInfo[0].ds_medida}</div>
+                                                    <div className={css`font-size: 10px;`}>Fonte:{painelInfo[0].ds_fonte}</div>
+                                                </div>
+                                            </div>
+                                        </Fragment>
                                     ) : null}
                                 </div>
                             </div>
@@ -131,10 +137,10 @@ const ReportEscola = (props) => {
                                 <div className="atbdb_content_module_contents">
                                     {showEscInfo ? (
                                         <div className="map" id="map-one" style={{ position: 'relative' }}>
-                                            <Map1 
-                                            lat={basicInfo.nr_latitude} 
-                                            long={basicInfo.nr_longitude} 
-                                            zoom={15}/>
+                                            <Map1
+                                                lat={basicInfo.nr_latitude}
+                                                long={basicInfo.nr_longitude}
+                                                zoom={15} />
                                         </div>
                                     ) : null}
                                 </div>
@@ -149,11 +155,11 @@ const ReportEscola = (props) => {
                                     <h4><span className="la la-user"></span>Informações Gerais</h4>
                                 </div>
                                 {/* <!-- ends: .atbd_widget_title --> */}
-                                <EscolaInfo 
-                                name={basicInfo.nm_unidade} 
-                                type='Município' 
-                                address={basicInfo.ds_endereco} 
-                                phone={basicInfo.ds_telefone} />
+                                <EscolaInfo
+                                    name={basicInfo.nm_unidade}
+                                    type='Município'
+                                    address={basicInfo.ds_endereco}
+                                    phone={basicInfo.ds_telefone} />
                             </div>
                             {/* end seller info */}
 

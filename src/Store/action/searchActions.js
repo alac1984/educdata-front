@@ -99,3 +99,15 @@ export const painelInfoRequested = id => {
       }
    }
 }
+
+export const idebInfoRequested = id => {
+   return {
+      type: actions.idebInfoRequested,
+      payload: {
+         url: `/ideb?id_unidade=${id}`,
+         method: 'get',
+         onSuccess: actions.idebInfoReceived,
+         onError: actions.idebInfoRequestFailed,
+      }
+   }
+}
