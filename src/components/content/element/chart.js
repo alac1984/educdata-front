@@ -11,7 +11,7 @@ const MyResponsiveLine = ({ data /* see data tab */ }) => (
         data={data}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: 'point' }}
-        yScale={{ type: 'linear', min: '3', max: '10', stacked: true, reverse: false }}
+        yScale={{ type: 'linear', min: '0', max: '6', stacked: true, reverse: false }}
         axisTop={null}
         axisRight={null}
         axisBottom={{

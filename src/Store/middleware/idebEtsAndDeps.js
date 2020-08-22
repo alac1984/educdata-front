@@ -45,11 +45,13 @@ const idebEtsAndDeps = ({ dispatch }) => next => action => {
 
    for(let i = 0; i <= 5; i++) {
       if(values.firstDep === -1 && values.etsForDeps[i].length > 0) {     
-         values.firstDep = i
+         // values.firstDep = i 
+         values.firstDep = 2 
       }
    }
 
-   values.firstEt = values.etsForDeps[values.firstDep][1]
+   // values.firstEt = values.etsForDeps[values.firstDep][1]
+   values.firstEt = 2
    
    dispatch(etsAndDepsCalculated(values))
 
