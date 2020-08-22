@@ -11,7 +11,7 @@ const MyResponsiveLine = ({ data /* see data tab */ }) => (
         data={data}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: 'point' }}
-        yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
+        yScale={{ type: 'linear', min: '3', max: '10', stacked: true, reverse: false }}
         axisTop={null}
         axisRight={null}
         axisBottom={{
@@ -19,7 +19,7 @@ const MyResponsiveLine = ({ data /* see data tab */ }) => (
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'transportation',
+            legend: 'Anos',
             legendOffset: 36,
             legendPosition: 'middle'
         }}
@@ -28,7 +28,7 @@ const MyResponsiveLine = ({ data /* see data tab */ }) => (
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'count',
+            legend: 'IDEB',
             legendOffset: -40,
             legendPosition: 'middle'
         }}

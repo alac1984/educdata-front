@@ -7,12 +7,16 @@ import { devToolsEnhancer } from 'redux-devtools-extension'
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import api from './Store/middleware/api'
+import idebEtsAndDeps from './Store/middleware/idebEtsAndDeps'
+import idebSerieHistorica from './Store/middleware/idebSerieHistorica'
 
 const store = createStore(
     rootReducers,
     compose(
         applyMiddleware(thunk),
         applyMiddleware(api),
+        applyMiddleware(idebEtsAndDeps),
+        applyMiddleware(idebSerieHistorica),
         devToolsEnhancer({ trace: true }),
     )
 )

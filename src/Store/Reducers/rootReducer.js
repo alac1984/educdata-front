@@ -13,6 +13,9 @@ import logoReducer from './logoReducer';
 import searchReducer from '../Reducers/searchReducer'
 import selectedUnidadeReducer from '../Reducers/selectedUnidadeReducer'
 import idebReducer from '../Reducers/idebReducer'
+import idebBtnsReducer from '../Reducers/idebBtnsReducer'
+import idebSerieHistoricaReducer from '../Reducers/idebSerieHistoricaReducer'
+import { idebSerieHistoricaRequested } from '../action/variables';
 
 const rootReducer = combineReducers({
     category: catReducer,
@@ -29,5 +32,7 @@ const rootReducer = combineReducers({
     search: searchReducer,
     selectedUnidade: selectedUnidadeReducer,
     ideb: idebReducer,
+    idebBtns: idebBtnsReducer,
+    idebSerieHistorica: idebSerieHistoricaReducer,
 });
 export default rootReducer;
