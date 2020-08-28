@@ -1,15 +1,15 @@
 import * as actions from '../action/variables'
-import { idebSerieHistoricaReceived } from '../action/idebActions'
+import { chartDataReceived } from '../action/idebActions'
 
 const idebSerieHistorica = store => next => action => {
 
-   if (action.type !== actions.idebSerieHistoricaRequested) {
+   if (action.type !== actions.chartDataRequested) {
       return next(action)
    }
 
    next(action)
 
-   const data = store.getState().ideb.idebInfo.results
+   const data = store.getState().ideb
 
    console.log('data', data)
 
@@ -21,18 +21,18 @@ const idebSerieHistorica = store => next => action => {
       data: []
    })
 
-   if(action.payload.et === 1) {
+   if(data.ActiveEt === 1) {
       exportData[0].id = 'Anos Iniciais'
-   } else if(action.payload.et === 2) {
+   } else if(data.ActiveEt === 2) {
       exportData[0].id = 'Anos Finais'
    } else {
       exportData[0].id = 'Ensino Médio'
    }
 
-   data.map(result => {
+   data.idebInfo.map(result => {
       if(
-         result.cd_tipo_dependencia === action.payload.dep
-         && result.cd_etapa_ideb === action.payload.et
+         result.cd_tipo_dependencia === data.activeDep
+         && result.cd_etapa_ideb === data.activeEt
       ) {
          exportData[0].data.push({
             x: result.nr_ano_ideb,
@@ -41,7 +41,7 @@ const idebSerieHistorica = store => next => action => {
       }
 
    })
-   store.dispatch(idebSerieHistoricaReceived(exportData))
+   store.dispatch(chartDataReceived(exportData))
 }
 
 export default idebSerieHistorica

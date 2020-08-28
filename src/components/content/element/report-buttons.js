@@ -54,18 +54,12 @@ const Button = (props) => {
 
 const ReportButtons = (props) => {
    const dispatch = useDispatch()
-   const ets = useSelector(state => state.idebBtns.ets)
-   const deps = useSelector(state => state.idebBtns.deps)
+   const ets = useSelector(state => state.ideb.ets)
+   const deps = useSelector(state => state.ideb.deps)
    const showIdeb = useSelector(state => state.ideb.showIdeb)
-   const idebInfo = useSelector(state => state.ideb.idebInfo.results)
-   const activeDep = useSelector(state => state.idebBtns.activeDep)
-   const activeEt = useSelector(state => state.idebBtns.activeEt)
-
-   useEffect(() => {
-      if (showIdeb) {
-         dispatch(etsAndDepsRequested(idebInfo))
-      }
-   }, [showIdeb])
+   const idebInfo = useSelector(state => state.ideb.idebInfo)
+   const activeDep = useSelector(state => state.ideb.activeDep)
+   const activeEt = useSelector(state => state.ideb.activeEt)
 
    return (
       <Fragment>

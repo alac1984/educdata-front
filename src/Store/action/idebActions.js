@@ -12,22 +12,8 @@ export const idebInfoRequested = id => {
    }
 }
 
-export const etsAndDepsRequested = idebInfo => {
-   return {
-      type: actions.etsAndDepsRequested,
-      payload: idebInfo
-   }
-}
 
-export const etsAndDepsCalculated = values => {
-   return {
-      type: actions.etsAndDepsCalculated,
-      payload: values
-   }
-}
-
-
-export const idebSerieHistoricaRequested = (dep, et) => {
+export const idebSerieHistoricaRequested = (dep = -1, et = -1) => {
    return {
       type: actions.idebSerieHistoricaRequested,
       payload: {
@@ -37,9 +23,29 @@ export const idebSerieHistoricaRequested = (dep, et) => {
    }
 }
 
-export const idebSerieHistoricaReceived = data => {
+export const depDefined = deps => {
    return {
-      type: actions.idebSerieHistoricaReceived,
-      payload: data
+      type: actions.depDefined,
+      payload: deps
+   }
+}
+
+export const etDefined = ets => {
+   return {
+      type: actions.etDefined,
+      payload: ets
+   }
+}
+
+export const chartDataRequested = () => {
+   return {
+      type: actions.chartDataRequested,
+   }
+}
+
+export const chartDataReceived = data => {
+   return {
+      type: actions.chartDataReceived,
+      payload: data,
    }
 }

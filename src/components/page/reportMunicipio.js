@@ -7,8 +7,7 @@ import { MunicipioInfo } from '../content/element/widget';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserClock } from '@fortawesome/free-solid-svg-icons'
-import MyResponsiveLine from '../content/element/chart'
-import IdebSerieHistorica from '../content/element/idebSerieHistorica'
+import IdebChart from '../content/element/idebChart'
 import {
    selectedUnidadeRequested,
    cityInfoRequested,
@@ -16,7 +15,6 @@ import {
 } from '../../Store/action/searchActions';
 import {
    idebInfoRequested,
-   idebSerieHistoricaRequested
 } from '../../Store/action/idebActions'
 import ReportButtons from '../content/element/report-buttons'
 import { css, cx } from 'emotion';
@@ -55,7 +53,6 @@ const ReportMunicipio = (props) => {
    const showPainelInfo = useSelector(state => state.selectedUnidade.showPainelInfo)
    const idebInfo = useSelector(state => state.ideb.idebInfo.results)
    const [logo, setLogo] = useState('')
-   const [graphInfo, setGraphInfo] = useState([])
    const id = props.match.params.id
 
    useEffect(() => {
@@ -172,7 +169,7 @@ const ReportMunicipio = (props) => {
                                     width: 750px;
                                     height: 450px; 
                                 `)}>
-                                   <IdebSerieHistorica/>
+                                   <IdebChart/>
                         </div>
                      </div>
 
