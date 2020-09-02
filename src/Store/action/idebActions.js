@@ -17,23 +17,37 @@ export const idebSerieHistoricaRequested = (dep = -1, et = -1) => {
    return {
       type: actions.idebSerieHistoricaRequested,
       payload: {
-         et: et,
          dep: dep,
+         et: et,
       }
    }
 }
 
-export const depDefined = deps => {
+export const allDepsDefined = deps => {
    return {
-      type: actions.depDefined,
+      type: actions.allDepsDefined,
       payload: deps
    }
 }
 
-export const etDefined = ets => {
+export const etsForActiveDepDefined = ets => {
    return {
-      type: actions.etDefined,
+      type: actions.etsForActiveDepDefined,
       payload: ets
+   }
+}
+
+export const activeDepChanged = dep => {
+   return {
+      type: actions.activeDepChanged,
+      payload: dep
+   }
+}
+
+export const activeEtChanged = et => {
+   return {
+      type: actions.activeEtChanged,
+      payload: et
    }
 }
 

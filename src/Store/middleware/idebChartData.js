@@ -21,9 +21,9 @@ const idebSerieHistorica = store => next => action => {
       data: []
    })
 
-   if(data.ActiveEt === 1) {
+   if(data.activeEt === 1) {
       exportData[0].id = 'Anos Iniciais'
-   } else if(data.ActiveEt === 2) {
+   } else if(data.activeEt === 2) {
       exportData[0].id = 'Anos Finais'
    } else {
       exportData[0].id = 'Ensino Médio'

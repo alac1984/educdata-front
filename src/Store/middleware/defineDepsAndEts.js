@@ -1,5 +1,11 @@
 import * as actions from '../action/variables'
-import { depDefined, etDefined, chartDataRequested } from '../action/idebActions'
+import { 
+   allDepsDefined, 
+   etsForActiveDepDefined, 
+   chartDataRequested,
+   activeDepChanged,
+   activeEtChanged,
+} from '../action/idebActions'
 
 const defineDepsAndEts = store => next => action => {
 
@@ -22,7 +28,6 @@ const defineDepsAndEts = store => next => action => {
          deps.sort((a,b) => a-b)
       })
 
-      store.dispatch(depDefined(deps))
 
       data.map(value => {
          if (!ets.includes(value.cd_etapa_ideb) && value.cd_tipo_dependencia === deps[0]) {
@@ -30,15 +35,26 @@ const defineDepsAndEts = store => next => action => {
          }
          deps.sort((a,b) => a-b)
       })
-
-      store.dispatch(etDefined(ets))
+      store.dispatch(activeDepChanged(deps[0]))
+      store.dispatch(activeEtChanged(ets[0]))
+      store.dispatch(allDepsDefined(deps))
+      store.dispatch(etsForActiveDepDefined(ets))
       store.dispatch(chartDataRequested(deps[0], ets[0]))
 
    } else {
+      store.dispatch(activeDepChanged(action.payload.dep))
+      store.dispatch(activeEtChanged(action.payload.et))
+
+      ets = []
+      data.map(value => {
+         if (!ets.includes(value.cd_etapa_ideb) && value.cd_tipo_dependencia === action.payload.dep) {
+            ets.push(value.cd_etapa_ideb)
+         }
+         deps.sort((a,b) => a-b)
+      })
+      store.dispatch(etsForActiveDepDefined(ets))
       store.dispatch(chartDataRequested(action.payload.dep, action.payload.et))
    }
-
-
 
 }
 

@@ -9,6 +9,7 @@ export default function idebReducer(state = {
    activeDep: 0,
    activeEt: 0,
    etsForActiveDep: [],
+   hasSerieHistorica: false,
    serieHistorica: [],
 },
    action
@@ -30,24 +31,30 @@ export default function idebReducer(state = {
             isFetching: true,
             showSerieHistorica: false,
          })
-      case actions.depDefined:
+      case actions.allDepsDefined:
          return Object.assign({}, state, {
             showSerieHistorica: false,
             deps: action.payload,
-            activeDep: action.payload[0],
          })
-      case actions.etDefined:
+      case actions.activeDepChanged:
          return Object.assign({}, state, {
             showSerieHistorica: false,
+            activeDep: action.payload,
+         })
+      case actions.activeEtChanged:
+         return Object.assign({}, state, {
+            showSerieHistorica: false,
+            activeEt: action.payload,
+         })
+      case actions.etsForActiveDepDefined:
+         return Object.assign({}, state, {
             etsForActiveDep: action.payload,
-            activeEt: action.payload[0],
          })
       case actions.chartDataReceived:
          return Object.assign({}, state, {
             serieHistorica: action.payload,
             showSerieHistorica: true,
          })
-
       default:
          return state
    }
