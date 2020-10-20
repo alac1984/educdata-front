@@ -20,9 +20,9 @@ const store = createStore(
         applyMiddleware(thunk),
         applyMiddleware(api),
         applyMiddleware(idebShStarterBtns),
-        applyMiddleware(idebShListenerCompBtns),
         applyMiddleware(idebShListenerEtAndDep),
         applyMiddleware(idebShProcessChartData),
+        applyMiddleware(idebShListenerCompBtns),
         devToolsEnhancer({ trace: true }),
     )
 )

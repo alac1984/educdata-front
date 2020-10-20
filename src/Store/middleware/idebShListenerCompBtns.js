@@ -76,9 +76,10 @@ const idebShListenerCompBtns = store => next => async action => {
          newCompBtnsState[key] = 0
       }
    })
-   
 
+   console.log('newCompBtnsState', newCompBtnsState)
    store.dispatch({type: actions.newCompBtnStateDefined, payload: newCompBtnsState})
+
 }
 
 export default idebShListenerCompBtns

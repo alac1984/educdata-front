@@ -14,7 +14,6 @@ const IdebChart = () => {
       <Fragment>
          {canShowChart ? (
             <Fragment>
-               {console.log(showingChart)}
                <MyResponsiveLine data={showingChart} />
             </Fragment>
          ) : null}

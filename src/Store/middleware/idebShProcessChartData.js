@@ -65,7 +65,6 @@ function convertToChartData(data, type, activeEt, activeDep) {
       }
    })
 
-   console.log(exportData[0])
    return exportData[0]
 
 }
