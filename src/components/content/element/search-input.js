@@ -5,7 +5,8 @@ import {
    unidadesRequested,
    userTyped,
    userErasedAll,
-   escKeyHitted
+   escKeyHitted,
+   unidadeChosed
 } from '../../../Store/action/searchActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { debounce } from 'lodash'
@@ -131,8 +132,8 @@ const SearchInput = () => {
          {showResults ? (
             <ul className={ulStyle}>
                {typeof unidades === 'object' && unidades !== null ? (
-                  unidades.map(unidade => (
-                     <li className={itemStyle} key={unidade.id_unidade}>
+                  unidades.map((unidade, index) => (
+                     <li className={itemStyle} key={index}>
                         <div className={itemContainerStyle}>
                            {/* Link if it is ESCOLA */}
                            {unidade.cd_tipo_unidade === 5 ? (
@@ -145,7 +146,8 @@ const SearchInput = () => {
                            ) : null}
                            {/* Link if it is MUNICÍPIO */}
                            {unidade.cd_tipo_unidade === 4 ? (
-                              <Link className={css`grid-column: 1 / 1;`} to={'/unidade/municipio/' + unidade.id_unidade}>
+                              <Link className={css`grid-column: 1 / 1;`} to={'/unidade/municipio/' + unidade.id_unidade}
+                              onClick={() => dispatch(unidadeChosed(unidades[index]))}>
                                  <div className={css`display: flex; flex-direction: column;`}>
                                     {unidade.nm_unidade}
                                     <span className={idSpanStyle}>ID: {unidade.id_unidade}</span>

@@ -12,7 +12,7 @@ import loginReducer from './loginReducer';
 import logoReducer from './logoReducer';
 import searchReducer from '../Reducers/searchReducer'
 import selectedUnidadeReducer from '../Reducers/selectedUnidadeReducer'
-import idebReducer from '../Reducers/idebReducer'
+import idebShReducer from '../Reducers/idebShReducer'
 
 const rootReducer = combineReducers({
     category: catReducer,
@@ -28,6 +28,6 @@ const rootReducer = combineReducers({
     logo: logoReducer,
     search: searchReducer,
     selectedUnidade: selectedUnidadeReducer,
-    ideb: idebReducer,
+    idebSh: idebShReducer,
 });
 export default rootReducer;

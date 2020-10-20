@@ -14,6 +14,14 @@ export const unidadesRequested = (searchTerm, cancelToken) => {
    }
 }
 
+export const unidadeChosed = unidade => {
+   return {
+      type: actions.unidadeChosed,
+      payload: unidade
+   }
+}
+
+
 // Request the selected unidade (in Listing Details)
 export const selectedUnidadeRequested = id => {
    return {
@@ -46,56 +54,5 @@ export const userErasedAll = () => {
 export const escKeyHitted = () => {
    return {
       type: actions.escKeyHitted
-   }
-}
-
-// Used for get latitude and longitude of states 
-export const stateInfoRequested = id => {
-   return {
-      type: actions.stateInfoRequested,
-      payload: {
-         url: `/estinfo/${id}`,
-         method: 'get',
-         onSuccess: actions.stateInfoReceived,
-         onError: actions.stateInfoRequestFailed,
-      }
-   }
-}
-
-// Used for get latitude and longitude of cities
-export const cityInfoRequested = id => {
-   return {
-      type: actions.cityInfoRequested,
-      payload: {
-         url: `/muninfo/${id}`,
-         method: 'get',
-         onSuccess: actions.cityInfoReceived,
-         onError: actions.cityInfoRequestFailed,
-      }
-   }
-}
-
-// Used for get basic info from schools
-export const schoolInfoRequested = id => {
-   return {
-      type: actions.schoolInfoRequested,
-      payload: {
-         url: `/escinfo/${id}`,
-         method: 'get',
-         onSuccess: actions.schoolInfoReceived,
-         onError: actions.schoolInfoRequestFailed,
-      }
-   }
-}
-
-export const painelInfoRequested = id => {
-   return {
-      type: actions.painelInfoRequested,
-      payload: {
-         url: `/painelind?unidade=${id}`,
-         method: 'get',
-         onSuccess: actions.painelInfoReceived,
-         onError: actions.painelInfoRequestFailed,
-      }
    }
 }

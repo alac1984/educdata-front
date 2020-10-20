@@ -32,7 +32,7 @@ const MyResponsiveLine = ({ data /* see data tab */ }) => (
             legendOffset: -40,
             legendPosition: 'middle'
         }}
-        colors={{ scheme: 'nivo' }}
+        colors={{datum: 'color'}}
         pointSize={10}
         pointColor={{ theme: 'background' }}
         pointBorderWidth={2}

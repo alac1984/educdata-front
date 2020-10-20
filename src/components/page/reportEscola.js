@@ -7,11 +7,6 @@ import { EscolaInfo } from '../content/element/widget';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserClock } from '@fortawesome/free-solid-svg-icons'
-import {
-    selectedUnidadeRequested,
-    schoolInfoRequested,
-    painelInfoRequested
-} from '../../Store/action/searchActions';
 import { css, cx } from 'emotion';
 
 const noAction = e => e.preventDefault();
@@ -52,9 +47,6 @@ const ReportEscola = (props) => {
     const id = props.match.params.id
 
     useEffect(() => {
-        dispatch(selectedUnidadeRequested(id));
-        dispatch(schoolInfoRequested(id));
-        dispatch(painelInfoRequested(id));
     }, [])
 
     useEffect(() => {

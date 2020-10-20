@@ -7,11 +7,6 @@ import { StateInfo } from '../content/element/widget';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserClock } from '@fortawesome/free-solid-svg-icons'
-import {
-    selectedUnidadeRequested,
-    stateInfoRequested,
-    painelInfoRequested
-} from '../../Store/action/searchActions';
 import { css, cx } from 'emotion';
 
 const noAction = e => e.preventDefault();
@@ -50,9 +45,6 @@ const ReportMunicipio = (props) => {
     const id = props.match.params.id
 
     useEffect(() => {
-        dispatch(selectedUnidadeRequested(id));
-        dispatch(stateInfoRequested(id));
-        dispatch(painelInfoRequested(id));
     }, [])
 
     useEffect(() => {
