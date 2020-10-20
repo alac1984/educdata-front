@@ -50,24 +50,28 @@ const openReport = store => next => async action => {
          onError: actions.chartDataRequestFailed,
       }
    })
-   store.dispatch({
-      type: actions.chartDataProjRequested,
-      payload: {
-         url: `/idebshproj?id_un=${action.payload.id}`,
-         method: 'get',
-         onSuccess: actions.chartDataProjReceived,
-         onError: actions.chartDataProjRequestFailed,
-      }
-   })
-   store.dispatch({
-      type: actions.btnsRequested,
-      payload: {
-         url: `/idebshbtns?id_un=${action.payload.id}`,
-         method: 'get',
-         onSuccess: actions.btnsReceived,
-         onError: actions.btnsRequestFailed,
-      }
-   })
+   .then(
+      store.dispatch({
+         type: actions.chartDataProjRequested,
+         payload: {
+            url: `/idebshproj?id_un=${action.payload.id}`,
+            method: 'get',
+            onSuccess: actions.chartDataProjReceived,
+            onError: actions.chartDataProjRequestFailed,
+         }
+      })
+   )
+   .then(
+      store.dispatch({
+         type: actions.btnsRequested,
+         payload: {
+            url: `/idebshbtns?id_un=${action.payload.id}`,
+            method: 'get',
+            onSuccess: actions.btnsReceived,
+            onError: actions.btnsRequestFailed,
+         }
+      })
+   )
 
    if(action.payload.id > 9999999) { // Escola 
       store.dispatch(parentMunChartDataRequested(basicInfo.id_unidade_pai))
