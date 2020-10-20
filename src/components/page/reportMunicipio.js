@@ -8,14 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserClock } from '@fortawesome/free-solid-svg-icons'
 import IdebChart from '../content/element/idebChart'
+import * as actions from '../../Store/action/variables'
 import {
-   selectedUnidadeRequested,
-   cityInfoRequested,
-   painelInfoRequested,
-} from '../../Store/action/searchActions';
-import {
-   idebInfoRequested,
-} from '../../Store/action/idebActions'
+   requestAndProcessBtns,
+} from '../../Store/action/idebShActions'
 import ReportButtons from '../content/element/report-buttons'
 import { css, cx } from 'emotion';
 
@@ -46,22 +42,15 @@ const noBorderRight = css`
 const ReportMunicipio = (props) => {
    const dispatch = useDispatch();
    const logoUrl = useSelector(state => state.logo[0].light)
-   const unidade = useSelector(state => state.selectedUnidade.unidade)
    const basicInfo = useSelector(state => state.selectedUnidade.basicInfo)
-   const showMunInfo = useSelector(state => state.selectedUnidade.showMunInfo)
    const painelInfo = useSelector(state => state.selectedUnidade.painelInfo.results)
    const showPainelInfo = useSelector(state => state.selectedUnidade.showPainelInfo)
-   const idebInfo = useSelector(state => state.ideb.idebInfo.results)
    const [logo, setLogo] = useState('')
    const id = props.match.params.id
 
    useEffect(() => {
-      dispatch(selectedUnidadeRequested(id));
-      dispatch(cityInfoRequested(id));
-      dispatch(painelInfoRequested(id));
-      dispatch(idebInfoRequested(id));
+      dispatch({type: actions.reportOpened, payload: {id: id}})
    }, [])
-
 
 
    useEffect(() => {
@@ -85,7 +74,7 @@ const ReportMunicipio = (props) => {
                 `)}>
                <div className="container">
                   <div className="row">
-                     <BreadcrumbSingle filter={unidade} />
+                     <BreadcrumbSingle filter={basicInfo} />
                   </div>
                </div>
             </div>
@@ -144,7 +133,7 @@ const ReportMunicipio = (props) => {
                            </div>
                         </div>
                         <div className="atbdb_content_module_contents">
-                           {showMunInfo ? (
+                           {/* {showMunInfo ? (
                               <div className="map" id="map-one" style={{ position: 'relative' }}>
                                  <Map1
                                     lat={basicInfo.nr_latitude}
@@ -152,7 +141,7 @@ const ReportMunicipio = (props) => {
                                     zoom={10}
                                  />
                               </div>
-                           ) : null}
+                           ) : null} */}
                         </div>
                      </div>
 
@@ -164,7 +153,7 @@ const ReportMunicipio = (props) => {
                               <h4><span className="la la-map-o"></span>IDEB: Série Histórica</h4>
                            </div>
                         </div>
-                        <ReportButtons/>
+                        <ReportButtons id={id}/>
                         <div className={cx("atbdb_content_module_contents", css`
                                     width: 750px;
                                     height: 450px; 
@@ -180,7 +169,7 @@ const ReportMunicipio = (props) => {
                            <h4><span className="la la-user"></span>Informações Gerais</h4>
                         </div>
                         {/* <!-- ends: .atbd_widget_title --> */}
-                        <MunicipioInfo name='Fortaleza' type='Município' address='' phone='' />
+                        {/* <MunicipioInfo name='Fortaleza' type='Município' address='' phone='' /> */}
                      </div>
                      {/* end seller info */}
 

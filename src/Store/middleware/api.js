@@ -5,12 +5,16 @@ const api = ({ dispatch }) => next => async action => {
 
    if (
       action.type !== actions.unidadesRequested &&
+      action.type !== actions.btnsRequested &&
       action.type !== actions.selectedUnidadeRequested &&
-      action.type !== actions.cityInfoRequested &&
-      action.type !== actions.schoolInfoRequested &&
-      action.type !== actions.stateInfoRequested &&
-      action.type !== actions.idebInfoRequested &&
-      action.type !== actions.painelInfoRequested
+      action.type !== actions.latLongInfoRequested &&
+      action.type !== actions.painelInfoRequested &&
+      action.type !== actions.chartDataRequested &&
+      action.type !== actions.parentMunChartDataRequested &&
+      action.type !== actions.parentEstChartDataRequested &&
+      action.type !== actions.parentRegChartDataRequested &&
+      action.type !== actions.paisChartDataRequested &&
+      action.type !== actions.chartDataProjRequested
    ) {
       return next(action)
    } 
