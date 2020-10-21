@@ -55,6 +55,7 @@ export const addParentChartData = 'idebsh/addParentChartData'
 export const etOrDepBtnClicked = 'idebsh/etOrDepBtnClicked'
 
 export const convertToChartData = 'idebsh/convertToChartData'
+export const erasePreviousChartData = 'idebsh/erasePreviousChartData'
 
 export const unidadeChartDataConverted = 'idebsh/unidadeChartDataConverted'
 export const unidadeProjDataConverted = 'idebsh/unidadeProjDataConverted'

@@ -2,26 +2,38 @@ import * as actions from '../action/variables'
 
 function convertToChartData(data, type, activeEt, activeDep) {
 
+
+}
+
+const idebShProcessChartData = store => next => action => {
+
+   if (action.type !== actions.chartCreationRequested) {
+      return next(action)
+   }
+
+   next(action)
+
+
    let exportData = []
 
-   data.map(entry => {
-      if (entry.et === activeEt && entry.dep === activeDep) {
+   action.payload.data.map(entry => {
+      if (entry.et === action.payload.et && entry.dep === action.payload.dep) {
          exportData.push({
             id: '',
             color: 'hsl(2, 86%, 50%)',
             data: []
          })
 
-         if (activeEt === 1) {
+         if (action.payload.et === 1) {
             exportData[0].id = 'Anos Iniciais'
-         } else if (activeEt === 2) {
+         } else if (action.payload.et === 2) {
             exportData[0].id = 'Anos Finais'
          } else {
             exportData[0].id = 'Ensino Médio'
          }
 
-         if (type !== '') {
-            exportData[0].id = type
+         if (action.payload.datatype !== '') {
+            exportData[0].id = action.payload.datatype
             exportData[0].color = 'hsl(348, 70%, 0%)'
          }
 
@@ -65,30 +77,20 @@ function convertToChartData(data, type, activeEt, activeDep) {
       }
    })
 
-   return exportData[0]
+   if(action.payload.datatype === '') {
 
-}
-
-const idebShProcessChartData = store => next => action => {
-
-   if (action.type !== actions.chartCreationRequested) {
-      return next(action)
-   }
-
-   next(action)
-
-   const unidadeChartData = store.getState().idebSh.unidadeChartData
-   const unidadeProjData = store.getState().idebSh.unidadeProjData
-
-   let unidadeChartDataProcessed = convertToChartData(unidadeChartData, '' ,action.payload.et, action.payload.dep)
-   let unidadeProjDataProcessed = convertToChartData(unidadeProjData, 'Projeção' ,action.payload.et, action.payload.dep)
-
-   if(unidadeChartDataProcessed !== null && unidadeProjDataProcessed !== null) {
+      store.dispatch({type: actions.erasePreviousChartData})
+      .then(
+         store.dispatch({
+            type: actions.chartDataProcessed,
+            payload: exportData[0]
+         })
+      )
+   } else if(action.payload.datatype === 'Projeção') {
       store.dispatch({
-         type: actions.chartDataProcessed,
-         payload: [unidadeChartDataProcessed, unidadeProjDataProcessed]
+         type: actions.chartDataProjProcessed,
+         payload: exportData[0]
       })
-   } else {
    }
 }
 

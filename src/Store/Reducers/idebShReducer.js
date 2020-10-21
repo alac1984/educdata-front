@@ -93,8 +93,11 @@ export default function idebShReducer(state = {
          })
       case actions.chartDataProcessed:
          return Object.assign({}, state, {
-            showingChart: action.payload,
-            canShowChart: true,
+            showingChart: [...state.showingChart, action.payload],
+         })
+      case actions.chartDataProjProcessed:
+         return Object.assign({}, state, {
+            showingChart: [...state.showingChart, action.payload],
          })
       case actions.escolaCompBtnsDefined:
          return Object.assign({}, state, {
@@ -136,19 +139,21 @@ export default function idebShReducer(state = {
                ...action.payload,
             }
          })
+      case actions.erasePreviousChartData:
+         return Object.assign({}, state, {
+            showingChart: [],
+         })
       case actions.justRemoveParentChartData:
          return Object.assign({}, state, {
-            showingChart: [state.showingChart[0], state.showingChart[1]],
-            canShowChart: true,
+            showingChart: state.showingChart.slice(0, -1),
          })
       case actions.removeBeforeAddParentChartData:
          return Object.assign({}, state, {
-            showingChart: [state.showingChart[0], state.showingChart[1]],
-            canShowChart: false,
+            showingChart: state.showingChart.slice(0, -1),
          })
       case actions.addParentChartData:
          return Object.assign({}, state, {
-            showingChart: action.payload,
+            showingChart: [...state.showingChart, action.payload],
             canShowChart: true
          })
       case actions.parentBtnClicked:

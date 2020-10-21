@@ -66,24 +66,24 @@ function convertToChartData(data, type, activeEt, activeDep) {
    })
 
    console.log('exportData fora do if', exportData)
-   if(exportData.length > 0) {
-      console.log('exportData[0] no true',exportData[0])
+   if (exportData.length > 0) {
+      console.log('exportData[0] no true', exportData[0])
       return exportData[0]
    } else {
-      console.log('exportData[0] no false',exportData[0])
+      console.log('exportData[0] no false', exportData[0])
       return {
          id: '',
          color: 'hsl(2, 86%, 50%, 0)',
          data: [
-            {x: 2005, y: 0},
-            {x: 2007, y: 0},
-            {x: 2009, y: 0},
-            {x: 2011, y: 0},
-            {x: 2013, y: 0},
-            {x: 2015, y: 0},
-            {x: 2017, y: 0},
-            {x: 2019, y: 0},
-            {x: 2021, y: 0},
+            { x: 2005, y: 0 },
+            { x: 2007, y: 0 },
+            { x: 2009, y: 0 },
+            { x: 2011, y: 0 },
+            { x: 2013, y: 0 },
+            { x: 2015, y: 0 },
+            { x: 2017, y: 0 },
+            { x: 2019, y: 0 },
+            { x: 2021, y: 0 },
          ]
       }
    }
@@ -93,8 +93,8 @@ function convertToChartData(data, type, activeEt, activeDep) {
 const idebShListenerCompBtns = store => next => async action => {
 
    if (action.type !== actions.parentBtnClicked &&
-       action.type !== actions.etOrDepBtnClicked
-      ) {
+      action.type !== actions.etOrDepBtnClicked
+   ) {
       return next(action)
    }
 
@@ -107,12 +107,12 @@ const idebShListenerCompBtns = store => next => async action => {
    const showCompareBtns = store.getState().idebSh.showCompareBtns
    const showingChart = store.getState().idebSh.showingChart
    const activeEtAndDep = store.getState().idebSh.activeEtAndDep
-   
-   let newCompBtnsState = {...showCompareBtns}
 
-   switch(action.payload.btn) {
+   let newCompBtnsState = { ...showCompareBtns }
+
+   switch (action.payload.btn) {
       case 'mun':
-         if(newCompBtnsState.municipio == 2) {
+         if (newCompBtnsState.municipio == 2) {
             newCompBtnsState.municipio = 1
             newCompBtnsState.estado = 1
             newCompBtnsState.regiao = 1
@@ -126,23 +126,25 @@ const idebShListenerCompBtns = store => next => async action => {
             newCompBtnsState.estado = 1
             newCompBtnsState.regiao = 1
             newCompBtnsState.pais = 1
-            store.dispatch({
-               type: actions.removeBeforeAddParentChartData,
-               payload: [showingChart[0], showingChart[1]]
-            })
+            if(showingChart.length > 2) {
+               store.dispatch({
+                  type: actions.removeBeforeAddParentChartData,
+                  payload: [showingChart[0], showingChart[1]]
+               })
+            }
             store.dispatch({
                type: actions.addParentChartData,
-               payload: [...showingChart, convertToChartData(
-                  parentMunChartData, 
+               payload: convertToChartData(
+                  parentMunChartData,
                   'Município',
                   activeEtAndDep[0],
                   activeEtAndDep[1],
-                  )]
+               )
             })
          }
          break
       case 'est':
-         if(newCompBtnsState.estado == 2) {
+         if (newCompBtnsState.estado == 2) {
             newCompBtnsState.estado = 1
             newCompBtnsState.municipio = 1
             newCompBtnsState.regiao = 1
@@ -156,23 +158,25 @@ const idebShListenerCompBtns = store => next => async action => {
             newCompBtnsState.municipio = 1
             newCompBtnsState.regiao = 1
             newCompBtnsState.pais = 1
-            store.dispatch({
-               type: actions.removeBeforeAddParentChartData,
-               payload: [showingChart[0], showingChart[1]]
-            })
+            if(showingChart.length > 2) {
+               store.dispatch({
+                  type: actions.removeBeforeAddParentChartData,
+                  payload: [showingChart[0], showingChart[1]]
+               })
+            }
             store.dispatch({
                type: actions.addParentChartData,
-               payload: [...showingChart, convertToChartData(
-                  parentEstChartData, 
+               payload: convertToChartData(
+                  parentEstChartData,
                   'Estado',
                   activeEtAndDep[0],
                   activeEtAndDep[1],
-                  )]
+               )
             })
          }
          break
       case 'reg':
-         if(newCompBtnsState.regiao == 2) {
+         if (newCompBtnsState.regiao == 2) {
             newCompBtnsState.regiao = 1
             newCompBtnsState.estado = 1
             newCompBtnsState.municipio = 1
@@ -182,29 +186,31 @@ const idebShListenerCompBtns = store => next => async action => {
                payload: [showingChart[0], showingChart[1]]
             })
          } else {
-            newCompBtnsState.regiao= 2
+            newCompBtnsState.regiao = 2
             newCompBtnsState.estado = 1
             newCompBtnsState.municipio = 1
             newCompBtnsState.pais = 1
-            store.dispatch({
-               type: actions.removeBeforeAddParentChartData,
-               payload: [showingChart[0], showingChart[1]]
-            })
+            if (showingChart.length > 2) {
+               store.dispatch({
+                  type: actions.removeBeforeAddParentChartData,
+                  payload: [showingChart[0], showingChart[1]]
+               })
+            }
             store.dispatch({
                type: actions.addParentChartData,
-               payload: [...showingChart, convertToChartData(
-                  parentRegChartData, 
+               payload: convertToChartData(
+                  parentRegChartData,
                   'Região',
                   activeEtAndDep[0],
                   activeEtAndDep[1],
-                  )]
+               )
             })
          }
          break
       case 'pais':
-         if(newCompBtnsState.pais == 2) {
+         if (newCompBtnsState.pais == 2) {
             newCompBtnsState.pais = 1
-            newCompBtnsState.regiao= 1
+            newCompBtnsState.regiao = 1
             newCompBtnsState.estado = 1
             newCompBtnsState.municipio = 1
             store.dispatch({
@@ -213,21 +219,23 @@ const idebShListenerCompBtns = store => next => async action => {
             })
          } else {
             newCompBtnsState.pais = 2
-            newCompBtnsState.regiao= 1
+            newCompBtnsState.regiao = 1
             newCompBtnsState.estado = 1
             newCompBtnsState.municipio = 1
-            store.dispatch({
-               type: actions.removeBeforeAddParentChartData,
-               payload: [showingChart[0], showingChart[1]]
-            })
+            if (showingChart.length > 2) {
+               store.dispatch({
+                  type: actions.removeBeforeAddParentChartData,
+                  payload: [showingChart[0], showingChart[1]]
+               })
+            }
             store.dispatch({
                type: actions.addParentChartData,
-               payload: [...showingChart, convertToChartData(
-                  paisChartData, 
+               payload: convertToChartData(
+                  paisChartData,
                   'País',
                   activeEtAndDep[0],
                   activeEtAndDep[1],
-                  )]
+               )
             })
          }
          break
@@ -237,7 +245,7 @@ const idebShListenerCompBtns = store => next => async action => {
             payload: [showingChart[0], showingChart[1]]
          })
          newCompBtnsState.pais = 1
-         newCompBtnsState.regiao= 1
+         newCompBtnsState.regiao = 1
          newCompBtnsState.estado = 1
          newCompBtnsState.municipio = 1
          break
@@ -245,12 +253,12 @@ const idebShListenerCompBtns = store => next => async action => {
 
    // Colocando os zeros nos botões que não devem aparecer
    Object.keys(showCompareBtns).map(key => {
-      if(showCompareBtns[key] === 0) {
+      if (showCompareBtns[key] === 0) {
          newCompBtnsState[key] = 0
       }
    })
 
-   store.dispatch({type: actions.newCompBtnStateDefined, payload: newCompBtnsState})
+   store.dispatch({ type: actions.newCompBtnStateDefined, payload: newCompBtnsState })
 
 }
 

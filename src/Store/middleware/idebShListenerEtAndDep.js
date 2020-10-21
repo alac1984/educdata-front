@@ -12,6 +12,8 @@ const idebShListenerEtAndDep = store => next => async action => {
    next(action)
 
    const etsAndDeps = store.getState().idebSh.etsAndDeps
+   const unidadeChartData = store.getState().idebSh.unidadeChartData
+   const unidadeProjData = store.getState().idebSh.unidadeProjData
 
    let depsState = {
          total: 0,
@@ -73,7 +75,19 @@ const idebShListenerEtAndDep = store => next => async action => {
       type: actions.chartCreationRequested,
       payload: {
          et: action.payload.et,
-         dep: action.payload.dep
+         dep: action.payload.dep,
+         datatype: '',
+         data: unidadeChartData
+      }
+   })
+
+   store.dispatch({
+      type: actions.chartCreationRequested,
+      payload: {
+         et: action.payload.et,
+         dep: action.payload.dep,
+         datatype: 'Projeção',
+         data: unidadeProjData
       }
    })
 
