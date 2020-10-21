@@ -80,13 +80,16 @@ const idebShProcessChartData = store => next => action => {
    const unidadeChartData = store.getState().idebSh.unidadeChartData
    const unidadeProjData = store.getState().idebSh.unidadeProjData
 
-   const unidadeChartDataProcessed = convertToChartData(unidadeChartData, '' ,action.payload.et, action.payload.dep)
-   const unidadeProjDataProcessed = convertToChartData(unidadeProjData, 'Projeção' ,action.payload.et, action.payload.dep)
+   let unidadeChartDataProcessed = convertToChartData(unidadeChartData, '' ,action.payload.et, action.payload.dep)
+   let unidadeProjDataProcessed = convertToChartData(unidadeProjData, 'Projeção' ,action.payload.et, action.payload.dep)
 
-   store.dispatch({
-      type: actions.chartDataProcessed,
-      payload: [unidadeChartDataProcessed, unidadeProjDataProcessed]
-   })
+   if(unidadeChartDataProcessed !== null && unidadeProjDataProcessed !== null) {
+      store.dispatch({
+         type: actions.chartDataProcessed,
+         payload: [unidadeChartDataProcessed, unidadeProjDataProcessed]
+      })
+   } else {
+   }
 }
 
 export default idebShProcessChartData

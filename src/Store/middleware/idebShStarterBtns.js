@@ -63,7 +63,7 @@ const idebShStarterBtns = store => next => async action => {
    store.dispatch(activeEtAndDepChanged(
       action.payload.results[0].et, 
       action.payload.results[0].deps[0],
-      false))
+      true))
 }
 
 export default idebShStarterBtns

@@ -49,8 +49,16 @@ export const chartCreationRequested = 'initializer/chartCreationRequested'
 export const chartDataProcessed = 'idebSh/chartDataProcessed'
 export const chartDataProjProcessed = 'idebsh/chartDataProjProcessed'
 
-export const removeParentChartData = 'idebsh/removeParentChartData'
+export const justRemoveParentChartData = 'idebsh/justRemoveParentChartData'
+export const removeBeforeAddParentChartData = 'idebsh/removeBeforeAddParentChartData'
 export const addParentChartData = 'idebsh/addParentChartData'
+export const etOrDepBtnClicked = 'idebsh/etOrDepBtnClicked'
+
+export const convertToChartData = 'idebsh/convertToChartData'
+
+export const unidadeChartDataConverted = 'idebsh/unidadeChartDataConverted'
+export const unidadeProjDataConverted = 'idebsh/unidadeProjDataConverted'
+
 
 // Daqui pra baixo há que revisar quais ainda são necessárias
 

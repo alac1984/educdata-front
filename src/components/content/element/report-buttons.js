@@ -49,10 +49,12 @@ const Button = props => {
    const dispatch = useDispatch()
    const showBtn = props.showBtn
    const isActive = props.isActive
+   const showingChart = useSelector(state => state.idebSh.showingChart)
 
    return (
       <button className={cx('btn', dynBtnStyle({ isActive, showBtn }))}
          onClick={() => {
+            dispatch({type: actions.etOrDepBtnClicked, payload: {btn: 'etOrDep'}})
             dispatch(activeEtAndDepChanged(props.et, props.dep, props.changeOnEt))
          }}>
          {props.name}

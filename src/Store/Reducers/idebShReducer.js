@@ -136,13 +136,24 @@ export default function idebShReducer(state = {
                ...action.payload,
             }
          })
-      case actions.removeParentChartData:
+      case actions.justRemoveParentChartData:
          return Object.assign({}, state, {
-            showingChart: [state.showingChart[0], state.showingChart[1]]
+            showingChart: [state.showingChart[0], state.showingChart[1]],
+            canShowChart: true,
+         })
+      case actions.removeBeforeAddParentChartData:
+         return Object.assign({}, state, {
+            showingChart: [state.showingChart[0], state.showingChart[1]],
+            canShowChart: false,
          })
       case actions.addParentChartData:
          return Object.assign({}, state, {
-            showingChart: action.payload
+            showingChart: action.payload,
+            canShowChart: true
+         })
+      case actions.parentBtnClicked:
+         return Object.assign({}, state, {
+            canShowChart: false,
          })
       default:
          return state
