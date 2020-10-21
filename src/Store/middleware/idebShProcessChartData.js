@@ -20,8 +20,8 @@ function convertToChartData(data, type, activeEt, activeDep) {
             exportData[0].id = 'Ensino Médio'
          }
 
-         if (type === 'projeção') {
-            exportData[0].id = 'Projeção'
+         if (type !== '') {
+            exportData[0].id = type
             exportData[0].color = 'hsl(348, 70%, 0%)'
          }
 
@@ -79,13 +79,9 @@ const idebShProcessChartData = store => next => action => {
 
    const unidadeChartData = store.getState().idebSh.unidadeChartData
    const unidadeProjData = store.getState().idebSh.unidadeProjData
-   // const parentMunChartData = store.getState().idebSh.parentMunChartData
-   // const parentEstChartData = store.getState().idebSh.parentEstChartData
-   // const parentRegChartData = store.getState().idebSh.parentRegChartData
-   // const paisChartData = store.getState().idebSh.paisChartData
 
-   const unidadeChartDataProcessed = convertToChartData(unidadeChartData, 'unidade' ,action.payload.et, action.payload.dep)
-   const unidadeProjDataProcessed = convertToChartData(unidadeProjData, 'projeção' ,action.payload.et, action.payload.dep)
+   const unidadeChartDataProcessed = convertToChartData(unidadeChartData, '' ,action.payload.et, action.payload.dep)
+   const unidadeProjDataProcessed = convertToChartData(unidadeProjData, 'Projeção' ,action.payload.et, action.payload.dep)
 
    store.dispatch({
       type: actions.chartDataProcessed,

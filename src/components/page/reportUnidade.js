@@ -39,7 +39,7 @@ const noBorderRight = css`
    border-right: none;
 `
 
-const ReportMunicipio = (props) => {
+const ReportUnidade = (props) => {
    const dispatch = useDispatch();
    const logoUrl = useSelector(state => state.logo[0].light)
    const basicInfo = useSelector(state => state.selectedUnidade.basicInfo)
@@ -182,4 +182,4 @@ const ReportMunicipio = (props) => {
    )
 }
 
-export default ReportMunicipio;
+export default ReportUnidade;

@@ -95,7 +95,7 @@ export default function idebShReducer(state = {
          return Object.assign({}, state, {
             showingChart: action.payload,
             canShowChart: true,
-        })
+         })
       case actions.escolaCompBtnsDefined:
          return Object.assign({}, state, {
             showCompareBtns: {
@@ -105,7 +105,7 @@ export default function idebShReducer(state = {
                regiao: 1,
                pais: 1,
             }
-        })
+         })
       case actions.municipioCompBtnsDefined:
          return Object.assign({}, state, {
             showCompareBtns: {
@@ -114,7 +114,7 @@ export default function idebShReducer(state = {
                regiao: 1,
                pais: 1,
             }
-        })
+         })
       case actions.estadoCompBtnsDefined:
          return Object.assign({}, state, {
             showCompareBtns: {
@@ -122,20 +122,28 @@ export default function idebShReducer(state = {
                regiao: 1,
                pais: 1,
             }
-        })
+         })
       case actions.regiaoCompBtnsDefined:
          return Object.assign({}, state, {
             showCompareBtns: {
                ...state.showCompareBtns,
                pais: 1,
             }
-        })
+         })
       case actions.newCompBtnStateDefined:
          return Object.assign({}, state, {
             showCompareBtns: {
                ...action.payload,
             }
-        })
+         })
+      case actions.removeParentChartData:
+         return Object.assign({}, state, {
+            showingChart: [state.showingChart[0], state.showingChart[1]]
+         })
+      case actions.addParentChartData:
+         return Object.assign({}, state, {
+            showingChart: action.payload
+         })
       default:
          return state
    }
