@@ -4,7 +4,12 @@ import { NavLink } from 'react-router-dom';
 
 const noAction = e => e.preventDefault();
 
-export const MunicipioInfo = (props) => {
+export const UnidadeInfo = props => {
+    const nome = useSelector(state => state.selectedUnidade.basicInfo.nm_unidade)
+    const tipo = useSelector(state => state.selectedUnidade.basicInfo.cd_tipo_unidade)
+    const endereco = useSelector(state => state.selectedUnidade.latLongInfo.ds_endereco)
+    const telefone = useSelector(state => state.selectedUnidade.latLongInfo.ds_telefone)
+    const showLatLongInfo = useSelector(state => state.selectedUnidade.showLatLongInfo)
 
     return (
         <Fragment>
@@ -14,25 +19,38 @@ export const MunicipioInfo = (props) => {
                         <img src="../../assets/img/avatar-60x60.jpg" alt="AvatarImage" />
                     </div>
                     <div className="atbd_name_time">
-                        <h4>{props.name} <span className="verified" data-toggle="tooltip" data-placement="top" title="Verified"></span></h4>
+                        <h4>{nome} <span className="verified" data-toggle="tooltip" data-placement="top" title="Verified"></span></h4>
                         <span className="review_time">{props.type}</span>
                     </div>
                 </div>
                 {/* <!-- ends: .atbd_avatar_wrapper --> */}
                 <div className="atbd_widget_contact_info">
                     <ul>
-                        <li>
-                            <span className="la la-map-marker"></span>
-                            <span className="atbd_info">UF: {props.address}</span>
-                        </li>
-                        <li>
-                            <span className="la la-map-marker"></span>
-                            <span className="atbd_info">Messoregião: {props.address}</span>
-                        </li>
-                        <li>
-                            <span className="la la-map-marker"></span>
-                            <span className="atbd_info">Microregião: {props.address}</span>
-                        </li>
+                        {tipo === 5 && showLatLongInfo ? (
+                            <Fragment>
+                                <li>
+                                    {console.log('endereco', endereco)}
+                                    <span className="la la-map-marker"></span>
+                                    <span className="atbd_info">Endereço: {endereco}</span>
+                                </li>
+                                <li>
+                                    <span className="la la-map-marker"></span>
+                                    <span className="atbd_info">Telefone: {telefone}</span>
+                                </li>
+                            </Fragment>
+                        ) : null}
+                        {tipo < 5 && showLatLongInfo ? (
+                            <Fragment>
+                                <li>
+                                    <span className="la la-map-marker"></span>
+                                    <span className="atbd_info">Messoregião: </span>
+                                </li>
+                                <li>
+                                    <span className="la la-map-marker"></span>
+                                    <span className="atbd_info">Microregião: </span>
+                                </li>
+                            </Fragment>
+                        ) : null}
                     </ul>
                 </div>
                 {/* <!-- ends: .atbd_widget_contact_info --> */}
@@ -41,75 +59,6 @@ export const MunicipioInfo = (props) => {
     )
 }
 
-export const StateInfo = (props) => {
-
-    return (
-        <Fragment>
-            <div className="widget-body atbd_author_info_widget">
-                <div className="atbd_avatar_wrapper">
-                    <div className="atbd_review_avatar">
-                        <img src="../../assets/img/avatar-60x60.jpg" alt="AvatarImage" />
-                    </div>
-                    <div className="atbd_name_time">
-                        <h4>{props.name} <span className="verified" data-toggle="tooltip" data-placement="top" title="Verified"></span></h4>
-                        <span className="review_time">{props.type}</span>
-                    </div>
-                </div>
-                {/* <!-- ends: .atbd_avatar_wrapper --> */}
-                <div className="atbd_widget_contact_info">
-                    <ul>
-                        <li>
-                            <span className="la la-map-marker"></span>
-                            <span className="atbd_info">UF: {props.address}</span>
-                        </li>
-                        <li>
-                            <span className="la la-map-marker"></span>
-                            <span className="atbd_info">Messoregião: {props.address}</span>
-                        </li>
-                        <li>
-                            <span className="la la-map-marker"></span>
-                            <span className="atbd_info">Microregião: {props.address}</span>
-                        </li>
-                    </ul>
-                </div>
-                {/* <!-- ends: .atbd_widget_contact_info --> */}
-            </div>
-        </Fragment>
-    )
-}
-
-export const EscolaInfo = (props) => {
-
-    return (
-        <Fragment>
-            <div className="widget-body atbd_author_info_widget">
-                <div className="atbd_avatar_wrapper">
-                    <div className="atbd_review_avatar">
-                        <img src="../../assets/img/avatar-60x60.jpg" alt="AvatarImage" />
-                    </div>
-                    <div className="atbd_name_time">
-                        <h4>{props.name} <span className="verified" data-toggle="tooltip" data-placement="top" title="Verified"></span></h4>
-                        <span className="review_time">{props.type}</span>
-                    </div>
-                </div>
-                {/* <!-- ends: .atbd_avatar_wrapper --> */}
-                <div className="atbd_widget_contact_info">
-                    <ul>
-                        <li>
-                            <span className="la la-map-marker"></span>
-                            <span className="atbd_info">{props.address}</span>
-                        </li>
-                        <li>
-                            <span className="la la-phone"></span>
-                            <span className="atbd_info">{props.phone}</span>
-                        </li>
-                    </ul>
-                </div>
-                {/* <!-- ends: .atbd_widget_contact_info --> */}
-            </div>
-        </Fragment>
-    )
-}
 
 export class SellerInfo extends Component {
     render() {

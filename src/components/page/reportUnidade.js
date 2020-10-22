@@ -3,7 +3,7 @@ import Header from '../layout/header';
 import { Footer } from '../layout/footer';
 import { BreadcrumbSingle } from '../content/element/breadcrumb';
 import Map1 from '../content/element/map';
-import { MunicipioInfo } from '../content/element/widget';
+import { UnidadeInfo } from '../content/element/widget';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserClock } from '@fortawesome/free-solid-svg-icons'
@@ -45,11 +45,13 @@ const ReportUnidade = (props) => {
    const basicInfo = useSelector(state => state.selectedUnidade.basicInfo)
    const painelInfo = useSelector(state => state.selectedUnidade.painelInfo.results)
    const showPainelInfo = useSelector(state => state.selectedUnidade.showPainelInfo)
+   const lat = useSelector(state => state.selectedUnidade.latLongInfo.nr_latitude)
+   const long = useSelector(state => state.selectedUnidade.latLongInfo.nr_longitude)
    const [logo, setLogo] = useState('')
    const id = props.match.params.id
 
    useEffect(() => {
-      dispatch({type: actions.reportOpened, payload: {id: id}})
+      dispatch({ type: actions.reportOpened, payload: { id: id } })
    }, [])
 
 
@@ -129,36 +131,15 @@ const ReportUnidade = (props) => {
                      <div className="atbd_content_module">
                         <div className="atbd_content_module__tittle_area">
                            <div className="atbd_area_title">
-                              <h4><span className="la la-map-o"></span>Localização</h4>
-                           </div>
-                        </div>
-                        <div className="atbdb_content_module_contents">
-                           {/* {showMunInfo ? (
-                              <div className="map" id="map-one" style={{ position: 'relative' }}>
-                                 <Map1
-                                    lat={basicInfo.nr_latitude}
-                                    long={basicInfo.nr_longitude}
-                                    zoom={10}
-                                 />
-                              </div>
-                           ) : null} */}
-                        </div>
-                     </div>
-
-                     {/* Map end */}
-
-                     <div className="atbd_content_module">
-                        <div className="atbd_content_module__tittle_area">
-                           <div className="atbd_area_title">
                               <h4><span className="la la-map-o"></span>IDEB: Série Histórica</h4>
                            </div>
                         </div>
-                        <ReportButtons id={id}/>
+                        <ReportButtons id={id} />
                         <div className={cx("atbdb_content_module_contents", css`
                                     width: 750px;
                                     height: 450px; 
                                 `)}>
-                                   <IdebChart/>
+                           <IdebChart />
                         </div>
                      </div>
 
@@ -169,8 +150,18 @@ const ReportUnidade = (props) => {
                            <h4><span className="la la-user"></span>Informações Gerais</h4>
                         </div>
                         {/* <!-- ends: .atbd_widget_title --> */}
-                        {/* <MunicipioInfo name='Fortaleza' type='Município' address='' phone='' /> */}
+                        <UnidadeInfo />
                      </div>
+                     <div className="widget atbd_widget widget-card">
+                        <div className="atbd_widget_title">
+                           <h4><span className="la la-map-marker"></span>Localização</h4>
+                        </div>{/*<!-- ends: .atbd_widget_title -->*/}
+                        <div className="widget-body atbdb_content_module_contents">
+                           <div className="map" id="map-two" style={{ position: 'relative' }}>
+                              <Map1 styles="true" lat={lat} long={long} />
+                           </div>
+                        </div>{/*<!-- ends: .atbdb_content_module_contents -->*/}
+                     </div>{/*<!-- ends: widget -->*/}
                      {/* end seller info */}
 
                   </div>

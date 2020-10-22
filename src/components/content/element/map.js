@@ -195,12 +195,8 @@ const Map1 = (props) => {
     const [long, setLong] = useState()
 
     useEffect(() => {
-        console.log('props.lat: ', props.lat)
-        console.log('props.long: ', props.long)
         setLat(props.lat)
         setLong(props.long)
-        console.log('lat: ', lat)
-        console.log('long: ', long)
     }, [props.lat, props.long])
     return (
         <Fragment>            
