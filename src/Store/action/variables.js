@@ -60,6 +60,8 @@ export const erasePreviousChartData = 'idebsh/erasePreviousChartData'
 export const unidadeChartDataConverted = 'idebsh/unidadeChartDataConverted'
 export const unidadeProjDataConverted = 'idebsh/unidadeProjDataConverted'
 
+export const showChart = 'idebsh/showChart'
+
 
 // Daqui pra baixo há que revisar quais ainda são necessárias
 

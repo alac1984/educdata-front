@@ -12,7 +12,9 @@ const IdebChart = () => {
 
    return (
       <Fragment>
-         <MyResponsiveLine data={showingChart} />
+         {canShowChart? (
+            <MyResponsiveLine data={showingChart} />
+         ) : null}
       </Fragment>
    )
 }

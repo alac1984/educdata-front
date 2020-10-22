@@ -154,11 +154,18 @@ export default function idebShReducer(state = {
       case actions.addParentChartData:
          return Object.assign({}, state, {
             showingChart: [...state.showingChart, action.payload],
-            canShowChart: true
          })
       case actions.parentBtnClicked:
          return Object.assign({}, state, {
             canShowChart: false,
+         })
+      case actions.etOrDepBtnClicked:
+         return Object.assign({}, state, {
+            canShowChart: false,
+         })
+      case actions.showChart:
+         return Object.assign({}, state, {
+            canShowChart: true,
          })
       default:
          return state
