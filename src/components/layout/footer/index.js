@@ -86,7 +86,7 @@ export class Footer extends Component {
                             <div className="row">
                                 <div className="col-lg-12">
                                     <div className="footer-bottom--content">
-                                        <NavLink to="/" className="footer-logo"><img src="./assets/img/logo.png" alt="" /></NavLink>
+                                        <NavLink to="/" className="footer-logo"><img width="180px" src="./assets/img/logo.png" alt="" /></NavLink>
                                         <p className="m-0 copy-text">©2019 educDATA. Feito com <span className="la la-heart-o" /> por <NavLink onClick={noAction} to="http://www.twitter.com/javascriptering">André Carvalho</NavLink></p>
                                         <ul className="list-unstyled lng-list">
                                             <li><NavLink onClick={noAction} to="/english">English</NavLink></li>
