@@ -14,18 +14,31 @@ import { debounce } from 'lodash'
 import axios from 'axios'
 
 const ulStyle = css`
+   position: relative;
+   margin: 0 auto;
+   top: -185px;
+   z-index: 10;
    list-style: none;
    background-color: white;
    padding: 0;
-   padding-top: 10px;
-   border-left: 1px solid gray;
-   border-bottom: 1px solid gray;
-   border-right: 1px solid gray;
+   border-left: 1px solid #b3b5b3;
+   border-bottom: 1px solid #b3b5b3;
+   border-right: 1px solid #b3b5b3;
+
+   @media (min-width: 992px) {
+      top: -155px;
+   }
+
+   @-moz-document url-prefix() {
+      top: -210px;
+
+   }
+
 `
 
 const itemStyle = css`
-   padding-left: 10px;
-   padding-right: 10px;
+   padding-left: 15px;
+   padding-right: 15px;
    text-align: left;
    text-transform: uppercase;
    font-size: 14px;
@@ -37,6 +50,7 @@ const itemStyle = css`
 const itemContainerStyle = css`
    display: grid;
    grid-template-columns: 2fr 1fr;
+   grid-template-rows: 40px 40px;
    align-items: center;
    min-height: 60px;
    border-bottom: 1px solid #D3D3D3;
@@ -61,13 +75,13 @@ const unidadeStyle = css`
    }
 `
 const informationStyle = css`
-   grid-column: 2 / 2;
-   font-size: 13px;
+   grid-column: 1 / 1;
+   grid-row: 2 / 2;
    list-style: none;
-   align-self: center;
+   align-self: start;
    display: flex;
-   flex-direction: column;
-   align-items: flex-end;
+   border-radius: 2px;
+   padding: 0;
 
    @media (max-width: 767.98px) {
       font-size: 11px;
@@ -80,8 +94,15 @@ const informationStyle = css`
 `
 
 const idSpanStyle = css`
+   margin-left: 8px;
+   color: #C0C0C0;
    font-style: italic;
    font-size: 12px;
+`
+const nomeSpanStyle = css`
+   display: flex;
+   align-items: center;
+   font-size: 15px;
 `
 
 const AdvSearch = () => {
@@ -156,20 +177,20 @@ const AdvSearch = () => {
                               }
                            
                            `)}><Typewriter options={{ loop: 'true' }} onInit={(typewriter) => {
-                              typewriter.typeString(' professores.')
-                                 .pauseFor(2500)
-                                 .deleteAll()
-                                 .typeString(' jornalistas.')
-                                 .pauseFor(2500)
-                                 .deleteAll()
-                                 .typeString(' gestores.')
-                                 .pauseFor(2500)
-                                 .deleteAll()
-                                 .typeString(' estudantes.')
-                                 .pauseFor(2500)
-                                 .deleteAll()
-                                 .start()
-                           }} /></h2>
+                                 typewriter.typeString(' professores.')
+                                    .pauseFor(2500)
+                                    .deleteAll()
+                                    .typeString(' jornalistas.')
+                                    .pauseFor(2500)
+                                    .deleteAll()
+                                    .typeString(' gestores.')
+                                    .pauseFor(2500)
+                                    .deleteAll()
+                                    .typeString(' estudantes.')
+                                    .pauseFor(2500)
+                                    .deleteAll()
+                                    .start()
+                              }} /></h2>
                            <p className="sub_title">Bem-vindo ao educDATA. Nosso trabalho é fornecer dados sobre a educação brasileira.</p>
                         </div>
                      </div>{/* ends: .search_title_area */}
@@ -183,81 +204,18 @@ const AdvSearch = () => {
                                  onKeyDown={e => setKey(e.keyCode)}
                               />
                               {isFetching ? (
+                                 <div className={css`display: flex; margin-top: 10px;`}>
                                  <img className={css`
-                  width: 45px;
-                  height: 45px; 
-               `} src={require('../../../img/spinner.gif')} />
+                                    width: 30px;
+                                    height: 30px; 
+                                 `} src={require('../../../img/spinner.gif')} />
+                                 <p className={css`padding-left: 6px;`}>Aguarde enquanto carregamos os dados...</p>
+                                 </div>
                               ) : null}
                            </div>
                         </div>
 
                      </form>{/* ends: .search_form */}
-                     {showResults ? (
-                        <ul className={ulStyle}>
-                           {typeof unidades === 'object' && unidades !== null ? (
-                              unidades.map((unidade, index) => (
-                                 <li className={itemStyle} key={index}>
-                                    <div className={itemContainerStyle}>
-                                       {/* Link if it is ESCOLA */}
-                                       {unidade.cd_tipo_unidade === 5 ? (
-                                          <Link className={css`grid-column: 1 / 1;`} to={'/unidade/escola/' + unidade.id_unidade}>
-                                             <div className={css`display: flex; flex-direction: column;`}>
-                                                {unidade.nm_unidade}
-                                                <span className={idSpanStyle}>ID: {unidade.id_unidade}</span>
-                                             </div>
-                                          </Link>
-                                       ) : null}
-                                       {/* Link if it is MUNICÍPIO */}
-                                       {unidade.cd_tipo_unidade === 4 ? (
-                                          <Link className={css`grid-column: 1 / 1;`} to={'/unidade/municipio/' + unidade.id_unidade}
-                                             onClick={() => dispatch(unidadeChosed(unidades[index]))}>
-                                             <div className={css`display: flex; flex-direction: column;`}>
-                                                {unidade.nm_unidade}
-                                                <span className={idSpanStyle}>ID: {unidade.id_unidade}</span>
-                                             </div>
-                                          </Link>
-                                       ) : null}
-                                       {/* Link if it is ESTADO */}
-                                       {unidade.cd_tipo_unidade === 3 ? (
-                                          <Link className={css`grid-column: 1 / 1;`} to={'/unidade/estado/' + unidade.id_unidade}>
-                                             <div className={css`display: flex; flex-direction: column;`}>
-                                                {unidade.nm_unidade}
-                                                <span className={idSpanStyle}>ID: {unidade.id_unidade}</span>
-                                             </div>
-                                          </Link>
-                                       ) : null}
-                                       {/* Link if it is REGIÃO*/}
-                                       {unidade.cd_tipo_unidade === 2 ? (
-                                          <Link className={css`grid-column: 1 / 1;`} to={'/unidade/regiao/' + unidade.id_unidade}>
-                                             <div className={css`display: flex; flex-direction: column;`}>
-                                                {unidade.nm_unidade}
-                                                <span className={idSpanStyle}>ID: {unidade.id_unidade}</span>
-                                             </div>
-                                          </Link>
-                                       ) : null}
-                                       {/* Link if it is BRASIL */}
-                                       {unidade.cd_tipo_unidade === 1 ? (
-                                          <Link className={css`grid-column: 1 / 1;`} to={'/unidade/brasil/' + unidade.id_unidade}>
-                                             <div className={css`display: flex; flex-direction: column;`}>
-                                                {unidade.nm_unidade}
-                                                <span className={idSpanStyle}>ID: {unidade.id_unidade}</span>
-                                             </div>
-                                          </Link>
-                                       ) : null}
-                                       {/* Mostrar mais resultados */}
-                                       <ul className={informationStyle}>
-                                          <li><span className='badge badge-secondary'>{unidade.nm_tipo}</span></li>
-                                          <li><span className='badge badge-primary'>{unidade.nm_unidade_pai}</span></li>
-                                       </ul>
-                                    </div>
-                                 </li>
-                              ))
-                           ) : null}
-                           <Link to={'/mais-resultados?busca=' + query}>
-                              Mostrar mais resultados
-                                 </Link>
-                        </ul>
-                     ) : null}
                   </div>{/* ends: .col-lg-10 */}
 
                </div>
@@ -265,6 +223,259 @@ const AdvSearch = () => {
             </div>
          </div>{/* ends: .directory_search_area */}
 
+         {showResults ? (
+            <div className='container'>
+               <div className='row'>
+                  <div className='col-lg-10 offset-lg-1'>
+                     <ul className={ulStyle}>
+                        {typeof unidades === 'object' && unidades !== null ? (
+                           unidades.map((unidade, index) => (
+                              <li className={itemStyle} key={index}>
+                                 <div className={itemContainerStyle}>
+                                    {/* Link if it is ESCOLA */}
+                                    {unidade.cd_tipo_unidade === 5 ? (
+                                       <Fragment>
+                                          <Link className={css`grid-column: 1 / 1;`} to={'/unidade/escola/' + unidade.id_unidade}
+                                             onClick={() => dispatch(unidadeChosed(unidades[index]))}>
+                                             <div className={nomeSpanStyle}>
+                                                <p className={css`margin-bottom: 0;`}>{unidade.nm_unidade}</p>
+                                                <span className={idSpanStyle}>ID: {unidade.id_unidade}</span>
+                                             </div>
+                                          </Link>
+                                          <ul className={css`
+                                             width: 100%;
+                                             padding: 0;
+                                             list-style: none; 
+                                             display: flex;
+                                             grid-column: 2 / 2;
+                                             grid-row: 1 / span 2;
+                                             align-self: center;
+                                             justify-self: center;
+                                             display: flex;
+                                             flex-direction: row-reverse;
+                                             flex-wrap: wrap;
+                                             justify-content: end;
+                                          `}>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>IDEB</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>SAEB</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>SPAECE</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>INFRA</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>ENEM</span>
+                                             </li>
+                                          </ul>
+                                       </Fragment>
+                                    ) : null}
+                                    {/* Link if it is MUNICÍPIO */}
+                                    {unidade.cd_tipo_unidade === 4 ? (
+                                       <Fragment>
+                                          <Link className={css`grid-column: 1 / 1;`} to={'/unidade/municipio/' + unidade.id_unidade}
+                                             onClick={() => dispatch(unidadeChosed(unidades[index]))}>
+                                             <div className={nomeSpanStyle}>
+                                                <p className={css`margin-bottom: 0;`}>{unidade.nm_unidade}</p>
+                                                <div className={idSpanStyle}>ID: {unidade.id_unidade}</div>
+                                             </div>
+                                          </Link>
+                                          <ul className={css`
+                                             width: 100%;
+                                             padding: 0;
+                                             list-style: none; 
+                                             display: flex;
+                                             grid-column: 2 / 2;
+                                             grid-row: 1 / span 2;
+                                             align-self: center;
+                                             justify-self: center;
+                                             display: flex;
+                                             flex-direction: row-reverse;
+                                             flex-wrap: wrap;
+                                             justify-content: end; 
+                                          `}>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>IDEB</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>SAEB</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>SPAECE</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>INFRA</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>ENEM</span>
+                                             </li>
+                                          </ul>
+                                       </Fragment>
+                                    ) : null}
+                                    {/* Link if it is ESTADO */}
+                                    {unidade.cd_tipo_unidade === 3 ? (
+                                       <Fragment>
+                                          <Link className={css`grid-column: 1 / 1;`} to={'/unidade/estado/' + unidade.id_unidade}
+                                             onClick={() => dispatch(unidadeChosed(unidades[index]))}>
+                                             <div className={nomeSpanStyle}>
+                                                <p className={css`margin-bottom: 0;`}>{unidade.nm_unidade}</p>
+                                                <div className={idSpanStyle}>ID: {unidade.id_unidade}</div>
+                                             </div>
+                                          </Link>
+                                          <ul className={css`
+                                             width: 100%;
+                                             padding: 0;
+                                             list-style: none; 
+                                             display: flex;
+                                             grid-column: 2 / 2;
+                                             grid-row: 1 / span 2;
+                                             align-self: center;
+                                             justify-self: center;
+                                             display: flex;
+                                             flex-direction: row-reverse;
+                                             flex-wrap: wrap;
+                                             justify-content: end;
+                                          `}>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>IDEB</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>SAEB</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>SPAECE</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>INFRA</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>ENEM</span>
+                                             </li>
+                                          </ul>
+                                       </Fragment>
+                                    ) : null}
+                                    {/* Link if it is REGIÃO*/}
+                                    {unidade.cd_tipo_unidade === 2 ? (
+                                       <Fragment>
+                                          <Link className={css`grid-column: 1 / 1;`} to={'/unidade/regiao/' + unidade.id_unidade}
+                                             onClick={() => dispatch(unidadeChosed(unidades[index]))}>
+                                             <div className={css`display: flex; flex-direction: column;`}>
+                                                <p className={css`margin-bottom: 0;`}>{unidade.nm_unidade}</p>
+                                                <div className={idSpanStyle}>ID: {unidade.id_unidade}</div>
+                                             </div>
+                                          </Link>
+                                          <ul className={css`
+                                             width: 100%;
+                                             padding: 0;
+                                             list-style: none; 
+                                             display: flex;
+                                             grid-column: 2 / 2;
+                                             grid-row: 1 / span 2;
+                                             align-self: center;
+                                             justify-self: center;
+                                             display: flex;
+                                             flex-direction: row-reverse;
+                                             flex-wrap: wrap;
+                                             justify-content: end;
+                                          `}>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>IDEB</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>SAEB</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>SPAECE</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>INFRA</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>ENEM</span>
+                                             </li>
+                                          </ul>
+                                       </Fragment>
+                                    ) : null}
+                                    {/* Link if it is BRASIL */}
+                                    {unidade.cd_tipo_unidade === 1 ? (
+                                       <Fragment>
+                                          <Link className={css`grid-column: 1 / 1;`} to={'/unidade/brasil/' + unidade.id_unidade}
+                                             onClick={() => dispatch(unidadeChosed(unidades[index]))}>
+                                             <div className={nomeSpanStyle}>
+                                                <p className={css`margin-bottom: 0;`}>{unidade.nm_unidade}</p>
+                                                <div className={idSpanStyle}>ID: {unidade.id_unidade}</div>
+                                             </div>
+                                          </Link>
+                                          <ul className={css`
+                                             width: 100%;
+                                             padding: 0;
+                                             list-style: none; 
+                                             display: flex;
+                                             grid-column: 2 / 2;
+                                             grid-row: 1 / span 2;
+                                             align-self: center;
+                                             justify-self: center;
+                                             display: flex;
+                                             flex-direction: row-reverse;
+                                             flex-wrap: wrap;
+                                             justify-content: end;
+                                          `}>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>IDEB</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>SAEB</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>SPAECE</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>INFRA</span>
+                                             </li>
+                                             <li className={css`margin-top: 2px; margin-left: 2px;`}>
+                                                <span className={cx('badge badge-primary', css`font-size: 10px; line-height: 14px;`)}>ENEM</span>
+                                             </li>
+                                          </ul>
+                                       </Fragment>
+                                    ) : null}
+                                    {/* Mostrar mais resultados */}
+                                    <ul className={informationStyle}>
+                                       <li><span className={cx('badge badge-pill badge-info', css`
+                                             font-size: 10px !important;
+                                             line-height: 18px;
+                                             color: white;
+                                             width: 100px;
+                                             `
+                                       )}>{unidade.nm_tipo}</span></li>
+                                       <li><span className={cx('badge badge-pill badge-primary', css`
+                                             font-size: 10px !important;
+                                             line-height: 18px;
+                                             `
+                                       )}>{unidade.nm_unidade_pai}</span></li>
+                                    </ul>
+                                 </div>
+                              </li>
+                           ))
+                        ) : null}
+                        <div className={css`
+                           padding-top: 15px; 
+                           padding-left: 15px;
+                           padding-bottom: 15px; 
+                        `}>
+                           <Link to={'/mais-resultados?busca=' + query}>
+                              Mostrar mais resultados
+                           </Link>
+                        </div>
+                     </ul>
+
+                  </div>
+               </div>
+            </div>
+         ) : null}
       </Fragment>
    )
 }
